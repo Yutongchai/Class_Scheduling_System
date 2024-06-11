@@ -1,2 +1,2 @@
-// testing
-package Coding;
+//Testing
+import java.util.Scanner;

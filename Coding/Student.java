@@ -12,6 +12,11 @@ public class Student extends Person {
 
     public void enrollLesson(Lesson lesson) {
         // Enrollment logic here
-        // System.out.println("Student " + getName() + " enrolled in lesson: " + lesson.getDetails());
+        System.out.println("Student " + getName() + " enrolled in lesson: " + lesson.toString());
+    }
+
+    @Override
+    public String getDetails() {
+        return super.getDetails() + ", Grade: " + grade;
     }
 }

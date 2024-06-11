@@ -23,7 +23,7 @@ public class Tutor extends Person {
 
     public void addLesson(Lesson lesson) {
         lessonList.add(lesson);
-        // System.out.println("Lesson added: " + lesson.getDetails());
+        System.out.println("Lesson added: " + lesson.toString());
     }
 
     public void displayInfo() {
@@ -34,7 +34,12 @@ public class Tutor extends Person {
         }
         System.out.println("Lessons:");
         for (Lesson lesson : lessonList) {
-            // System.out.println(" - " + lesson.getDetails());
+            System.out.println(" - " + lesson.toString());
         }
+    }
+
+    @Override
+    public String getDetails() {
+        return super.getDetails() + ", Subject: " + subject;
     }
 }

@@ -1,5 +1,5 @@
 enum Day {
-    MON, TUE, WED, THU, FRI, SAT, SUN
+    MONDAY, TUESDAY, WEDNESDAY, THURSDAY, FRIDAY, SATURDAY, SUNDAY
 }
 
 // Abstract Class for Person
@@ -13,13 +13,24 @@ public abstract class Person {
         this.email = email;
         this.phoneNumber = phoneNumber;
     }
+    public void setName(String n) {
+        this.name = n;
+    }
 
     public String getName() {
         return name;
     }
+    
+    public void setEmail(String e) {
+        this.email = e;
+    }
 
     public String getEmail() {
         return email;
+    }
+
+    public void setPhoneNumber(String pn) {
+        this.phoneNumber = pn;
     }
 
     public String getPhoneNumber() {

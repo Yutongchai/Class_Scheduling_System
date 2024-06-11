@@ -17,7 +17,7 @@ class Schedule {
     public void removeLesson(String title) {
         boolean removed = false;
         for (int i = 0; i < lessons.size(); i++) {
-            if (lessons.get(i).getTitle().equalsIgnoreCase(title)) {
+            if (lessons.get(i).getSubject().equalsIgnoreCase(title)) {
                 System.out.println("Removed: " + lessons.get(i));
                 lessons.remove(i);
                 removed = true;
@@ -40,9 +40,9 @@ class Schedule {
             }
         }
     }
-}
 
-    /*ublic static void main(String[] args) {
+
+public static void main(String[] args) {
         Schedule schedule = new Schedule();
 
         // Create lessons
@@ -64,4 +64,4 @@ class Schedule {
         // Display lessons again
         schedule.displayLessons();
     }
-}*/
+}

@@ -5,12 +5,12 @@ enum Day {
 // Abstract Class for Person
 public abstract class Person {
     private String name;
-    private String address;
+    private String email;
     private String phoneNumber;
 
-    public Person(String name, String address, String phoneNumber) {
+    public Person(String name, String email, String phoneNumber) {
         this.name = name;
-        this.address = address;
+        this.email = email;
         this.phoneNumber = phoneNumber;
     }
 
@@ -18,8 +18,8 @@ public abstract class Person {
         return name;
     }
 
-    public String getAddress() {
-        return address;
+    public String getEmail() {
+        return email;
     }
 
     public String getPhoneNumber() {
@@ -27,6 +27,6 @@ public abstract class Person {
     }
 
     public String getDetails() {
-        return "Name: " + name + ", Address: " + address + ", Phone Number: " + phoneNumber;
+        return "Name: " + name + ", \nEmail Address: " + email + ", \nPhone Number: " + phoneNumber;
     }
 }

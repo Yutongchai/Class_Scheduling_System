@@ -1,3 +1,4 @@
+// Enumeration Class for Day
 enum Day {
     MONDAY, TUESDAY, WEDNESDAY, THURSDAY, FRIDAY, SATURDAY, SUNDAY
 }
@@ -38,6 +39,6 @@ public abstract class Person {
     }
 
     public String getDetails() {
-        return "Name: " + name + ", \nEmail Address: " + email + ", \nPhone Number: " + phoneNumber;
+        return "Name: " + name + ", \nEmail Address: " + email + ", \nPhone Number: " + phoneNumber + "\n";
     }
 }

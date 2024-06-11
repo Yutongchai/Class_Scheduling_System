@@ -1,8 +1,6 @@
-import java.util.Date;
-
 public class Lesson {
     private int lessonId;
-    private Date date;
+    private String date;
     private String time;
     private String subject;
     private Tutor tutor;
@@ -13,7 +11,7 @@ public class Lesson {
     private boolean isCancelled;
 
     // Constructor
-    public Lesson(int lessonId, Date date, String time, String subject, Tutor tutor, Student student, double price,
+    public Lesson(int lessonId, String date, String time, String subject, Tutor tutor, Student student, double price,
             Day day) {
         this.lessonId = lessonId;
         this.date = date;
@@ -36,11 +34,11 @@ public class Lesson {
         this.lessonId = lessonId;
     }
 
-    public Date getDate() {
+    public String getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(String date) {
         this.date = date;
     }
 
@@ -122,9 +120,6 @@ public class Lesson {
 
     // Method to calculate the lesson price (simple implementation)
     public void calculateLessonPrice() {
-        // Implement your pricing logic here
-        // For example, let's assume the price is based on the subject and the duration
-        // of the lesson
         double basePrice = 20.0; // Base price per lesson
         if ("Math".equalsIgnoreCase(subject)) {
             price = basePrice + 10; // Math lessons are more expensive

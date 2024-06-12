@@ -79,5 +79,9 @@ public class HomeTuitionSystem {
 
         Login login = new Login();
         login.login();
+
+        System.out.println("*---------------------------------------------------*");
+        System.out.println("|                HOME TUITION SYSTEM                |");
+        System.out.println("*---------------------------------------------------*");
     }
 }

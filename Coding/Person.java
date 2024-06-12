@@ -1,8 +1,3 @@
-// Enumeration Class for Day
-enum Day {
-    MONDAY, TUESDAY, WEDNESDAY, THURSDAY, FRIDAY, SATURDAY, SUNDAY
-}
-
 // Abstract Class for Person
 public abstract class Person {
     private String name;

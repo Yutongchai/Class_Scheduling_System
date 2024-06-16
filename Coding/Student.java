@@ -6,6 +6,7 @@ public class Student extends Person {
         this.grade = grade;
     }
 
+
     public String getGrade() {
         return grade;
     }

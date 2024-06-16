@@ -41,9 +41,32 @@ class Schedule {
         }
     }
 
+    // Display lessons for a specific student
+    public void displayLessonsForStudent(Student student) {
+        boolean found = false;
+        for (Lesson lesson : lessons) {
+            if (lesson.getStudent().getName() == student.getName()) {
+                System.out.println(lesson);
+                found = true;
+            }
+        }
+        if (!found) {
+            System.out.println("No lessons found for student: " + student.getName());
+        }
+    }
+}
 
-public static void main(String[] args) {
+/*public class Schedule {
+    public static void main(String[] args) {
         Schedule schedule = new Schedule();
+
+        // Assuming Tutor and Day classes are defined
+        Tutor tutor = new Tutor(1, "John Doe");
+        Day day = Day.MONDAY; // Assuming an enum Day is defined with values like MONDAY, TUESDAY, etc.
+
+        // Create students
+        Student student1 = new Student(1, "Alice");
+        Student student2 = new Student(2, "Bob");
 
         // Create lessons
         Lesson lesson1 = new Lesson(1, "2024-06-01", "09:00 AM", "Math", tutor, student1, 50.0, day);
@@ -55,8 +78,15 @@ public static void main(String[] args) {
         schedule.addLesson(lesson2);
         schedule.addLesson(lesson3);
 
-        // Display lessons
+        // Display all lessons
         schedule.displayLessons();
+
+        // Display lessons for a specific student
+        System.out.println("Lessons for Alice:");
+        schedule.displayLessonsForStudent(student1);
+
+        System.out.println("Lessons for Bob:");
+        schedule.displayLessonsForStudent(student2);
 
         // Remove a lesson
         schedule.removeLesson("Science");
@@ -64,4 +94,4 @@ public static void main(String[] args) {
         // Display lessons again
         schedule.displayLessons();
     }
-}
+}*/

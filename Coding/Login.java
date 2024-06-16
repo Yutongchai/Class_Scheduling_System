@@ -52,7 +52,9 @@ public class Login {
         } else {
             System.out.println("Invalid user type.");
         }
+        scanner.close();
     }
+
     
 
 }

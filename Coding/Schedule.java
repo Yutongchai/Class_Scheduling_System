@@ -46,9 +46,9 @@ public static void main(String[] args) {
         Schedule schedule = new Schedule();
 
         // Create lessons
-        Lesson lesson1 = new Lesson("Math", "09:00 AM");
-        Lesson lesson2 = new Lesson("Science", "11:00 AM");
-        Lesson lesson3 = new Lesson("History", "02:00 PM");
+        Lesson lesson1 = new Lesson(1, "2024-06-01", "09:00 AM", "Math", tutor, student1, 50.0, day);
+        Lesson lesson2 = new Lesson(2, "2024-06-01", "11:00 AM", "Science", tutor, student2, 50.0, day);
+        Lesson lesson3 = new Lesson(3, "2024-06-01", "02:00 PM", "History", tutor, student1, 50.0, day);
 
         // Add lessons to the schedule
         schedule.addLesson(lesson1);

@@ -1,15 +1,21 @@
 // Abstract Class for Person
 public abstract class Person {
+    private String type;
     private String name;
     private String username;
     private String password;
     private String email;
     private String phoneNumber;
 
-    public Person(String name, String email, String phoneNumber) {
+    public Person(String type, String name, String email, String phoneNumber) {
+        this.type = type;
         this.name = name;
         this.email = email;
         this.phoneNumber = phoneNumber;
+    }
+
+    public String getType() {
+        return type;
     }
 
     public void setName(String n) {

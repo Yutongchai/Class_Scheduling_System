@@ -5,8 +5,8 @@ public class Tutor extends Person {
     private ArrayList<Student> studentList;
     private ArrayList<Lesson> lessonList;
 
-    public Tutor(String name, String email, String phoneNumber, String subject) {
-        super(name, email, phoneNumber);
+    public Tutor(String type, String name, String email, String phoneNumber, String subject) {
+        super("Tutor", name, email, phoneNumber);
         this.subject = subject;
         this.studentList = new ArrayList<>();
         this.lessonList = new ArrayList<>();

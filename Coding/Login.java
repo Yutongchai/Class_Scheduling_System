@@ -39,7 +39,7 @@ public class Login {
                     String phoneNumber = scanner.nextLine();
                     System.out.println("Enter student grade: ");
                     String grade = scanner.nextLine();
-                    Student newStudent = new Student(username, null, phoneNumber, grade);
+                    Student newStudent = new Student("Student", username, null, phoneNumber, grade);
                     studentCredentials.put(username, password);
                     System.out.println("New student profile created.");
                     // Proceed with student functionality
@@ -58,3 +58,39 @@ public class Login {
     
 
 }
+
+
+
+/*
+ * public class Login {
+    // This is a placeholder login method
+    public User login() {
+        Scanner scanner = new Scanner(System.in);
+
+        // Dummy login for demonstration purposes
+        System.out.println("Enter your user ID:");
+        String userId = scanner.nextLine();
+
+        // Determine if the user is a student or a tutor based on userId
+        // In a real application, this would involve checking a database or a file
+        if (userId.startsWith("S")) {
+            // Assuming the student ID starts with "S"
+            for (Student student : HomeTuitionSystem.students) {
+                if (student.getUserId().equals(userId)) {
+                    return new User("Student", student, null);
+                }
+            }
+        } else if (userId.startsWith("T")) {
+            // Assuming the tutor ID starts with "T"
+            for (Tutor tutor : HomeTuitionSystem.tutors) {
+                if (tutor.getUserId().equals(userId)) {
+                    return new User("Tutor", null, tutor);
+                }
+            }
+        }
+        
+        System.out.println("Invalid user ID.");
+        return null;
+    }
+}
+ */

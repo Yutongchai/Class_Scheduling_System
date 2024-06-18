@@ -1,6 +1,6 @@
 public class Student extends Person {
     private String grade;
-    private Schedule schedule;
+    //private Schedule schedule;
 
     public Student(String type, String name, String email, String phoneNumber, String grade) {
         super("Student", name, email, phoneNumber);
@@ -19,7 +19,7 @@ public class Student extends Person {
     public void enrollLesson(Lesson lesson) {
         // Enrollment logic here
         System.out.println("Student " + getName() + " enrolled in lesson: " + lesson.toString());
-        schedule.addLesson(lesson);
+        //schedule.addLesson(lesson);
     }
 
     @Override

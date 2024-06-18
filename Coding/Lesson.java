@@ -115,6 +115,7 @@ public class Lesson {
         } else {
             this.isCancelled = true;
             System.out.println("Lesson cancelled.");
+            
         }
     }
 

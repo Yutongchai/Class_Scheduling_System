@@ -7,9 +7,16 @@ class Schedule {
         lessons = new ArrayList<>();
     }
 
-    // Add a lesson to the schedule
+    public ArrayList<Lesson> getLessons() {
+        return lessons;
+    }
+
     public void addLesson(Lesson lesson) {
         lessons.add(lesson);
+    }
+
+    public void removeLessonForStudent(Student student, String subject) {
+        lessons.removeIf(lesson -> lesson.getStudent().equals(student) && lesson.toString().equals(subject));
     }
 
     // Display lessons for a specific student in a timetable style

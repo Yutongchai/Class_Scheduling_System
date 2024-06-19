@@ -41,7 +41,7 @@ public abstract class Person {
     public String getPassword() {
         return password;
     }
-    
+
     public void setEmail(String e) {
         this.email = e;
     }
@@ -59,6 +59,7 @@ public abstract class Person {
     }
 
     public String getDetails() {
-        return "Name: " + name + ", \nEmail Address: " + email + ", \nPhone Number: " + phoneNumber + "\nUsername: " + username + "\n";
+        return "Name: " + name + ", \nEmail Address: " + email + ", \nPhone Number: " + phoneNumber + "\nUsername: "
+                + username + "\n";
     }
 }

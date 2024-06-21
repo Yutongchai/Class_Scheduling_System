@@ -42,11 +42,9 @@ public class Lesson {
 
     // Method to calculate the lesson price (simple implementation)
     public void calculateLessonPrice() {
-        double basePrice = 20.0; // Base price per lesson
-        if ("Math".equalsIgnoreCase(subject)) {
+        double basePrice = 30.0; // Base price per lesson
+        if ("Math".equalsIgnoreCase(subject) || "Science".equalsIgnoreCase(subject)) {
             price = basePrice + 10; // Math lessons are more expensive
-        } else if ("Science".equalsIgnoreCase(subject)) {
-            price = basePrice + 15; // Science lessons are even more expensive
         } else {
             price = basePrice; // Default price for other subjects
         }

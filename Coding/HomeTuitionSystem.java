@@ -51,7 +51,16 @@ public class HomeTuitionSystem {
                         schedule.displayLessonsForStudent(student);
                         break;
                     case 2:
-                        System.out.print("Enter course details (subject): ");
+                        System.out.print("List of subjects offered:\n");
+                        System.out.print("*******************************************************\n");
+                        System.out.print("*    Subject         | Day       | Time               *\n");
+                        System.out.print("* 1. Bahasa Malaysia | Friday    | 8:00 PM - 10:00 PM *\n");
+                        System.out.print("* 2. English         | Monday    | 8:00 PM - 10:00 PM *\n");
+                        System.out.print("* 3. History         | Thursday  | 8:00 PM - 10:00 PM *\n");
+                        System.out.print("* 4. Mathematics     | Tuesday   | 8:00 PM - 10:00 PM *\n");
+                        System.out.print("* 5. Science         | Wednesday | 8:00 PM - 10:00 PM *\n");
+                        System.out.print("*******************************************************\n");
+                        System.out.print("Enter course details (subject):\n");
                         String subject = scanner.nextLine();
                         Tutor tutor = tutors.get(count++ % tutors.size()); // Assigning first tutor for simplicity
                         double price = 50.0; // Assuming a fixed price

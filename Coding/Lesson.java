@@ -7,15 +7,17 @@ public class Lesson {
     private Tutor tutor;
     private Student student;
     private double price;
+    private Day day;
     private static List<Lesson> lessons = new ArrayList<>();
 
     // Constructor
-    public Lesson(int lessonId, String subject, Tutor tutor, Student student, double price) {
+    public Lesson(int lessonId, String subject, Tutor tutor, Student student, double price, Day day) {
         this.lessonId = lessonId;
         this.subject = subject;
         this.tutor = tutor;
         this.student = student;
         this.price = price;
+        this.day = day;
         lessons.add(this);
     }
 
@@ -40,11 +42,15 @@ public class Lesson {
         return price;
     }
 
+    public Day getDay() {
+        return day;
+    }
+
     // Method to calculate the lesson price (simple implementation)
     public void calculateLessonPrice() {
         double basePrice = 30.0; // Base price per lesson
         if ("Math".equalsIgnoreCase(subject) || "Science".equalsIgnoreCase(subject)) {
-            price = basePrice + 10; // Math lessons are more expensive
+            price = basePrice + 10; // Math and Science lessons are more expensive
         } else {
             price = basePrice; // Default price for other subjects
         }
@@ -59,11 +65,11 @@ public class Lesson {
     }
 
     // Method to add a new lesson for a student
-    public static void addLesson(int lessonId, String subject, Tutor tutor, Student student, double price) {
-        Lesson lesson = new Lesson(lessonId, subject, tutor, student, price);
+    public static void addLesson(int lessonId, String subject, Tutor tutor, Student student, double price, Day day) {
+        Lesson lesson = new Lesson(lessonId, subject, tutor, student, price, day);
         lesson.calculateLessonPrice();
         System.out.println("Student " + student.getName() + " registered for " + subject + " with tutor "
-                + tutor.getName() + ". Lesson ID: " + lessonId);
+                + tutor.getName() + " on " + day + ". Lesson ID: " + lessonId);
     }
 
     // Method to get all lessons
@@ -75,6 +81,7 @@ public class Lesson {
     @Override
     public String toString() {
         return "Lesson [lessonId=" + lessonId + ", subject=" + subject +
-                ", tutor=" + tutor.getName() + ", student=" + student.getName() + ", price=" + price + "]";
+                ", tutor=" + tutor.getName() + ", student=" + student.getName() + ", price=" + price +
+                ", day=" + day + "]";
     }
 }

@@ -7,69 +7,85 @@ class Schedule {
         lessons = new ArrayList<>();
     }
 
-    public ArrayList<Lesson> getLessons() {
-        return lessons;
-    }
-
     public void addLesson(Lesson lesson) {
         lessons.add(lesson);
     }
 
     public void removeLessonForStudent(Student student, String subject) {
-        lessons.removeIf(lesson -> lesson.getStudent().equals(student) && lesson.toString().equals(subject));
+        lessons.removeIf(
+                lesson -> lesson.getStudent().equals(student) && lesson.getSubject().equalsIgnoreCase(subject));
     }
 
-    // Display lessons for a specific student in a timetable style
-    public void displayLessonsForStudent(Student student) {
-        String[][] timetable = new String[7][7]; // 7 columns for time slots, 7 rows for days
+    // // Display lessons for a specific student in a timetable style
+    // public void displayLessonsForStudent(Student student) {
+    //     String[][] timetable = new String[7][7]; // 7 columns for time slots, 7 rows for days
 
-        // Initialize timetable with empty strings
-        for (int i = 0; i < 7; i++) {
-            for (int j = 0; j < 7; j++) {
-                timetable[i][j] = " ";
-            }
-        }
+    //     // Initialize timetable with empty strings
+    //     for (int i = 0; i < 7; i++) {
+    //         for (int j = 0; j < 7; j++) {
+    //             timetable[i][j] = " ";
+    //         }
+    //     }
 
-        // Populate timetable with lessons
-        String[] timeSlots = {"08:00 AM", "10:00 AM", "12:00 PM", "02:00 PM", "04:00 PM", "06:00 PM", "08:00 PM"};
-        for (Lesson lesson : lessons) {
-            if (lesson.getStudent().getName().equals(student.getName())) {
-                int row = -1;
-                int col = lesson.getDay().ordinal();
-                
-                for (int i = 0; i < timeSlots.length; i++) {
-                    if (timeSlots[i].equals(lesson.getTime())) {
-                        row = i;
-                        break;
-                    }
-                }
+    //     // Populate timetable with lessons
+    //     String[] timeSlots = { "08:00 AM", "10:00 AM", "12:00 PM", "02:00 PM", "04:00 PM", "06:00 PM", "08:00 PM" };
+    //     for (Lesson lesson : lessons) {
+    //         if (lesson.getStudent().equals(student)) {
+    //             int row = -1;
+    //             int col = lesson.getDay().ordinal();
 
-                if (row >= 0 && col >= 0) {
-                    timetable[row][col] = lesson.toString();
-                }
-            }
-        }
+    //             // Match the lesson to the correct time slot
+    //             for (int i = 0; i < timeSlots.length; i++) {
+    //                 if (timeSlots[i].equals(getClassTime(lesson.getSubject()))) {
+    //                     row = i;
+    //                     break;
+    //                 }
+    //             }
 
-        // Print headers for days
-        System.out.print("Time/Day      ");
-        for (Day day : Day.values()) {
-            System.out.printf("%-15s", day.toString());
-        }
-        System.out.println();
+    //             if (row >= 0 && col >= 0) {
+    //                 timetable[row][col] = lesson.getSubject(); // Display subject in timetable
+    //             }
+    //         }
+    //     }
 
-        // Print timetable with time slots
-        for (int i = 0; i < 7; i++) {
-            System.out.printf("%-12s", timeSlots[i]);
-            for (int j = 0; j < 7; j++) {
-                System.out.printf("%-15s", timetable[i][j]);
-            }
-            System.out.println();
-        }
-    }
+    //     // Print headers for days
+    //     System.out.print("Time/Day      ");
+    //     for (Day day : Day.values()) {
+    //         System.out.printf("%-15s", day.toString());
+    //     }
+    //     System.out.println();
+
+    //     // Print timetable with time slots
+    //     for (int i = 0; i < 7; i++) {
+    //         System.out.printf("%-12s", timeSlots[i]);
+    //         for (int j = 0; j < 7; j++) {
+    //             System.out.printf("%-15s", timetable[i][j]);
+    //         }
+    //         System.out.println();
+    //     }
+    // }
+
+    // // Method to get class time based on subject
+    // private String getClassTime(String subject) {
+    //     switch (subject) {
+    //         case "Malay":
+    //             return "08:00 PM - 10:00 PM";
+    //         case "English":
+    //             return "08:00 PM - 10:00 PM";
+    //         case "History":
+    //             return "08:00 PM - 10:00 PM";
+    //         case "Mathematics":
+    //             return "08:00 PM - 10:00 PM";
+    //         case "Science":
+    //             return "08:00 PM - 10:00 PM";
+    //         default:
+    //             return "";
+    //     }
+    // }
 
     public void displayLessonsForTutor(Tutor tutor) {
         for (Lesson lesson : lessons) {
-            if (lesson.getTutor().getName().equals(tutor.getName())) {
+            if (lesson.getTutor().equals(tutor)) {
                 System.out.println(lesson);
             }
         }

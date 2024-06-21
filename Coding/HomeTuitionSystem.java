@@ -36,6 +36,7 @@ public class HomeTuitionSystem {
 
     public void studentInterface(Student student, Scanner scanner) {
         int count = 0;
+        boolean firstTime = true;
         while (true) {
             System.out.println("1. View Schedule");
             System.out.println("2. Add Course");
@@ -48,10 +49,27 @@ public class HomeTuitionSystem {
 
                 switch (choice) {
                     case 1:
-                        schedule.displayLessonsForStudent(student);
+                        if (firstTime) {
+                            System.out.println("No registered subjects.");
+                        } else {
+                            // schedule.displayLessonsForStudent(student);
+                            List<Lesson> studentLessons = Lesson.getLessons().stream()
+                                    .filter(lesson -> lesson.getStudent().equals(student))
+                                    .collect(Collectors.toList());
+                            System.out.println("\n\nSubjects registered:");
+                            System.out.println("*****************************************************");
+                            System.out.println("*  Subject         | Day       | Time               *");
+                            System.out.println("*****************************************************");
+                            for (Lesson lesson : studentLessons) {
+                                System.out.printf("*  %-16s| %-10s| %-19s*%n", lesson.getSubject(),
+                                        lesson.getDay(), getClassTime(lesson.getSubject()));
+                            }
+                            System.out.println("*****************************************************");
+                        }
                         break;
                     case 2:
-                        while (true) {
+                        boolean registerAnother;
+                        do {
                             ArrayList<String> registeredSubjects = (ArrayList<String>) Lesson.getLessons().stream()
                                     .filter(lesson -> lesson.getStudent().equals(student))
                                     .map(Lesson::getSubject)
@@ -62,19 +80,19 @@ public class HomeTuitionSystem {
                             System.out.print("*  Subject         | Day       | Time               *\n");
 
                             if (!registeredSubjects.contains("Malay")) {
-                                System.out.print("*  Malay           | Friday    | 8:00 PM - 10:00 PM *\n");
+                                System.out.print("*  Malay           | FRIDAY    | 8:00 PM - 10:00 PM *\n");
                             }
                             if (!registeredSubjects.contains("English")) {
-                                System.out.print("*  English         | Monday    | 8:00 PM - 10:00 PM *\n");
+                                System.out.print("*  English         | MONDAY    | 8:00 PM - 10:00 PM *\n");
                             }
                             if (!registeredSubjects.contains("History")) {
-                                System.out.print("*  History         | Thursday  | 8:00 PM - 10:00 PM *\n");
+                                System.out.print("*  History         | THURSDAY  | 8:00 PM - 10:00 PM *\n");
                             }
                             if (!registeredSubjects.contains("Mathematics")) {
-                                System.out.print("*  Mathematics     | Tuesday   | 8:00 PM - 10:00 PM *\n");
+                                System.out.print("*  Mathematics     | TUESDAY   | 8:00 PM - 10:00 PM *\n");
                             }
                             if (!registeredSubjects.contains("Science")) {
-                                System.out.print("*  Science         | Wednesday | 8:00 PM - 10:00 PM *\n");
+                                System.out.print("*  Science         | WEDNESDAY | 8:00 PM - 10:00 PM *\n");
                             }
 
                             System.out.print("*******************************************************\n");
@@ -85,32 +103,57 @@ public class HomeTuitionSystem {
                                     "Science");
 
                             if (validSubjects.contains(subject) && !registeredSubjects.contains(subject)) {
+                                Day day = getDayBySubject(subject);
                                 Tutor tutor = tutors.get(count++ % tutors.size()); // Assigning first tutor for
                                                                                    // simplicity
                                 double price = 50.0; // Assuming a fixed price
                                 int lessonId = Lesson.getLessons().size() + 1;
-                                Lesson.addLesson(lessonId, subject, tutor, student, price);
+                                Lesson.addLesson(lessonId, subject, tutor, student, price, day);
 
-                                System.out.println("Do you want to register another subject? (yes/no)");
-                                String response = scanner.nextLine();
-                                if (response.equalsIgnoreCase("no")) {
-                                    double totalPrice = Lesson.calculateTotalFeePerMonth(student);
-                                    System.out.println("Total price to pay: $" + totalPrice);
-                                    schedule.displayLessonsForStudent(student);
-                                    return;
+                                while (true) {
+                                    System.out.println("Do you want to register another subject? (yes/no)");
+                                    String response = scanner.nextLine();
+                                    if (response.equalsIgnoreCase("yes")) {
+                                        registerAnother = true;
+                                        break;
+                                    } else if (response.equalsIgnoreCase("no")) {
+                                        List<Lesson> studentLessons = Lesson.getLessons().stream()
+                                                .filter(lesson -> lesson.getStudent().equals(student))
+                                                .collect(Collectors.toList());
+
+                                        System.out.println("\n\nSubjects registered:");
+                                        System.out.println("*****************************************************");
+                                        System.out.println("*  Subject         | Day       | Time               *");
+                                        System.out.println("*****************************************************");
+                                        for (Lesson lesson : studentLessons) {
+                                            System.out.printf("*  %-16s| %-10s| %-19s*%n", lesson.getSubject(),
+                                                    lesson.getDay(), getClassTime(lesson.getSubject()));
+                                        }
+                                        System.out.println("*****************************************************");
+
+                                        double totalPrice = Lesson.calculateTotalFeePerMonth(student);
+                                        System.out.println("\nTotal price to pay: $" + totalPrice + "\n");
+                                        // schedule.displayLessonsForStudent(student);
+                                        registerAnother = false;
+                                        break;
+                                    } else {
+                                        System.out.println("Invalid input. Please enter 'yes' or 'no'.");
+                                    }
                                 }
-                                break;
                             } else {
                                 System.out.println(
                                         "Invalid subject or already registered. Please enter a valid subject.");
+                                registerAnother = true;
                             }
-                        }
+                        } while (registerAnother);
+                        firstTime = false;
                         break;
                     case 3:
                         System.out.print("Enter course subject to delete: ");
                         String courseToDelete = scanner.nextLine();
                         schedule.removeLessonForStudent(student, courseToDelete);
                         break;
+
                     case 4:
                         return;
                     default:
@@ -120,5 +163,26 @@ public class HomeTuitionSystem {
                 scanner.next();
             }
         }
+    }
+
+    private Day getDayBySubject(String subject) {
+        switch (subject.toLowerCase()) {
+            case "malay":
+                return Day.FRIDAY;
+            case "english":
+                return Day.MONDAY;
+            case "history":
+                return Day.THURSDAY;
+            case "mathematics":
+                return Day.TUESDAY;
+            case "science":
+                return Day.WEDNESDAY;
+            default:
+                return null; // Or handle unknown subjects appropriately
+        }
+    }
+
+    private String getClassTime(String subject) {
+        return "8:00 PM - 10:00 PM"; // Assuming all classes have the same time
     }
 }

@@ -30,15 +30,16 @@ class Schedule {
         }
 
         System.out.println("\n\nLessons scheduled for Tutor " + tutor.getName() + ":");
-        System.out.println("************************************************************");
-        System.out.println("*  Subject         | Student      | Day       | Time        *");
-        System.out.println("************************************************************");
+        System.out.println("******************************************************************");
+        System.out.println("*  Subject         | Tutor       | Day       | Time              *");
+        System.out.println("******************************************************************");
+
         for (Lesson lesson : tutorLessons) {
             System.out.printf("*  %-16s| %-12s| %-10s| %-12s*%n", lesson.getSubject(),
                     lesson.getStudent().getName(), lesson.getDay(),
                     getClassTime(lesson.getSubject()));
         }
-        System.out.println("************************************************************");
+        System.out.println("******************************************************************");
     }
 
     public void displayStudentSchedule(Student student, boolean firstTime) {

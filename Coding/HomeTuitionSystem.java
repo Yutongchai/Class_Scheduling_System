@@ -76,33 +76,27 @@ public class HomeTuitionSystem {
                                     .collect(Collectors.toList());
 
                             System.out.print("List of subjects offered:\n");
-                            System.out.print("*****************************************************\n");
-                            System.out.print("*  Subject         | Day       | Time               *\n");
+                            System.out.print("*************************************************************\n");
+                            System.out.print("*  Subject         | Tutor       | Day       | Time         *\n");
 
-                            if (!registeredSubjects.contains("Malay")) {
-                                System.out.print("*  Malay           | FRIDAY    | 8:00 PM - 10:00 PM *\n");
-                            }
-                            if (!registeredSubjects.contains("English")) {
-                                System.out.print("*  English         | MONDAY    | 8:00 PM - 10:00 PM *\n");
-                            }
-                            if (!registeredSubjects.contains("History")) {
-                                System.out.print("*  History         | THURSDAY  | 8:00 PM - 10:00 PM *\n");
-                            }
-                            if (!registeredSubjects.contains("Mathematics")) {
-                                System.out.print("*  Mathematics     | TUESDAY   | 8:00 PM - 10:00 PM *\n");
-                            }
-                            if (!registeredSubjects.contains("Science")) {
-                                System.out.print("*  Science         | WEDNESDAY | 8:00 PM - 10:00 PM *\n");
+                            List<String> availableSubjects = tutors.stream()
+                                    .map(Tutor::getSubject)
+                                    .distinct()
+                                    .filter(subject -> !registeredSubjects.contains(subject))
+                                    .collect(Collectors.toList());
+
+                            for (Tutor tutor : tutors) {
+                                if (availableSubjects.contains(tutor.getSubject())) {
+                                    System.out.printf("*  %-16s| %-12s| %-10s| %-12s *\n", tutor.getSubject(),
+                                            tutor.getName(), getDayBySubject(tutor.getSubject()), "8:00 PM - 10:00 PM");
+                                }
                             }
 
-                            System.out.print("*******************************************************\n");
+                            System.out.print("*************************************************************\n");
                             System.out.print("Enter course details (subject):\n");
                             String subject = scanner.nextLine();
 
-                            List<String> validSubjects = List.of("Malay", "English", "History", "Mathematics",
-                                    "Science");
-
-                            if (validSubjects.contains(subject) && !registeredSubjects.contains(subject)) {
+                            if (availableSubjects.contains(subject)) {
                                 Day day = getDayBySubject(subject);
                                 Tutor tutor = tutors.get(count++ % tutors.size()); // Assigning first tutor for
                                                                                    // simplicity
@@ -133,7 +127,6 @@ public class HomeTuitionSystem {
 
                                         double totalPrice = Lesson.calculateTotalFeePerMonth(student);
                                         System.out.println("\nTotal price to pay: $" + totalPrice + "\n");
-                                        // schedule.displayLessonsForStudent(student);
                                         registerAnother = false;
                                         break;
                                     } else {
@@ -152,12 +145,12 @@ public class HomeTuitionSystem {
                         System.out.print("Enter course subject to delete: ");
                         String courseToDelete = scanner.nextLine();
                         schedule.removeLesson(student.getName(), courseToDelete);
-    
+
                         // Display updated subjects after deletion
                         List<Lesson> updatedLessons = Lesson.getLessons().stream()
                                 .filter(lesson -> lesson.getStudent().equals(student))
                                 .collect(Collectors.toList());
-    
+
                         System.out.println("\n\nUpdated subjects registered:");
                         System.out.println("*****************************************************");
                         System.out.println("*  Subject         | Day       | Time               *");
@@ -167,7 +160,7 @@ public class HomeTuitionSystem {
                                     lesson.getDay(), getClassTime(lesson.getSubject()));
                         }
                         System.out.println("*****************************************************");
-    
+
                         break;
 
                     case 4:
@@ -188,20 +181,20 @@ public class HomeTuitionSystem {
             System.out.println("2. View Schedule");
             System.out.println("3. View Students");
             System.out.println("4. Logout");
-    
+
             if (scanner.hasNextInt()) {
                 int choice = scanner.nextInt();
                 scanner.nextLine(); // Consume newline
-    
+
                 switch (choice) {
                     case 1:
                         System.out.println("Available subjects to choose time:");
                         List<String> subjects = List.of("Malay", "English", "History", "Mathematics", "Science");
                         subjects.forEach(subject -> System.out.println("* " + subject));
-    
+
                         System.out.println("Enter the subject:");
                         String subject = scanner.nextLine();
-    
+
                         if (subjects.contains(subject)) {
                             Day day = getDayBySubject(subject);
                             double price = 50.0; // Assuming a fixed price
@@ -245,7 +238,7 @@ public class HomeTuitionSystem {
         String grade = scanner.nextLine();
         return new Student("Student", name, email, phoneNumber, grade);
     }
-  
+
     private Day getDayBySubject(String subject) {
         switch (subject.toLowerCase()) {
             case "malay":
@@ -266,4 +259,5 @@ public class HomeTuitionSystem {
     private String getClassTime(String subject) {
         return "8:00 PM - 10:00 PM"; // Assuming all classes have the same time
     }
+
 }

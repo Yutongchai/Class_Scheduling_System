@@ -1,4 +1,5 @@
-Alice 111 Main St 011-1111111 Math
-Bob 222 Elm St 022-2222222 Science
-Charlie 333 Oak St 033-3333333 History
-David 444 Pine St 044-4444444 English
+Male, Hakim, Hakim@gmail.com, 019-7882345, Mathematics
+Female, Rahimah, rahimah@gmail.com, 014-8890067, Malay
+Female, Azizah, azizah@gmail.com, 014-8890089, Science
+Female, Bharates, bharates@gmail.com, 014-8890033, English
+Female, Maizurah, maizurah@gmail.com, 018-8890077, History

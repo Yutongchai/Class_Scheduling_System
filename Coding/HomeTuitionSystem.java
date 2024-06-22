@@ -152,12 +152,12 @@ public class HomeTuitionSystem {
                         System.out.print("Enter course subject to delete: ");
                         String courseToDelete = scanner.nextLine();
                         schedule.removeLesson(student.getName(), courseToDelete);
-    
+
                         // Display updated subjects after deletion
                         List<Lesson> updatedLessons = Lesson.getLessons().stream()
                                 .filter(lesson -> lesson.getStudent().equals(student))
                                 .collect(Collectors.toList());
-    
+
                         System.out.println("\n\nUpdated subjects registered:");
                         System.out.println("*****************************************************");
                         System.out.println("*  Subject         | Day       | Time               *");
@@ -167,7 +167,7 @@ public class HomeTuitionSystem {
                                     lesson.getDay(), getClassTime(lesson.getSubject()));
                         }
                         System.out.println("*****************************************************");
-    
+
                         break;
 
                     case 4:
@@ -198,101 +198,105 @@ public class HomeTuitionSystem {
                     case 1:
                         if (firstTime) {
                             System.out.println("No registered subjects.");
-                        } 
+                        }
                         // else {
-                        //     // schedule.displayLessonsForStudent(student);
-                        //     List<Lesson> studentLessons = Lesson.getLessons().stream()
-                        //             .filter(lesson -> lesson.getStudent().equals(student))
-                        //             .collect(Collectors.toList());
-                        //     System.out.println("\n\nSubjects registered:");
-                        //     System.out.println("*****************************************************");
-                        //     System.out.println("*  Subject         | Day       | Time               *");
-                        //     System.out.println("*****************************************************");
-                        //     for (Lesson lesson : studentLessons) {
-                        //         System.out.printf("*  %-16s| %-10s| %-19s*%n", lesson.getSubject(),
-                        //                 lesson.getDay(), getClassTime(lesson.getSubject()));
-                        //     }
-                        //     System.out.println("*****************************************************");
+                        // // schedule.displayLessonsForStudent(student);
+                        // List<Lesson> studentLessons = Lesson.getLessons().stream()
+                        // .filter(lesson -> lesson.getStudent().equals(student))
+                        // .collect(Collectors.toList());
+                        // System.out.println("\n\nSubjects registered:");
+                        // System.out.println("*****************************************************");
+                        // System.out.println("* Subject | Day | Time *");
+                        // System.out.println("*****************************************************");
+                        // for (Lesson lesson : studentLessons) {
+                        // System.out.printf("* %-16s| %-10s| %-19s*%n", lesson.getSubject(),
+                        // lesson.getDay(), getClassTime(lesson.getSubject()));
+                        // }
+                        // System.out.println("*****************************************************");
                         // }
                         break;
                     case 2:
                         boolean registerAnother;
                         // do {
-                        //     ArrayList<String> registeredSubjects = (ArrayList<String>) Lesson.getLessons().stream()
-                        //             .filter(lesson -> lesson.getStudent().equals(student))
-                        //             .map(Lesson::getSubject)
-                        //             .collect(Collectors.toList());
+                        // ArrayList<String> registeredSubjects = (ArrayList<String>)
+                        // Lesson.getLessons().stream()
+                        // .filter(lesson -> lesson.getStudent().equals(student))
+                        // .map(Lesson::getSubject)
+                        // .collect(Collectors.toList());
 
-                        //     System.out.print("List of subjects offered:\n");
-                        //     System.out.print("*****************************************************\n");
-                        //     System.out.print("*  Subject         | Day       | Time               *\n");
+                        // System.out.print("List of subjects offered:\n");
+                        // System.out.print("*****************************************************\n");
+                        // System.out.print("* Subject | Day | Time *\n");
 
-                        //     if (!registeredSubjects.contains("Malay")) {
-                        //         System.out.print("*  Malay           | FRIDAY    | 8:00 PM - 10:00 PM *\n");
-                        //     }
-                        //     if (!registeredSubjects.contains("English")) {
-                        //         System.out.print("*  English         | MONDAY    | 8:00 PM - 10:00 PM *\n");
-                        //     }
-                        //     if (!registeredSubjects.contains("History")) {
-                        //         System.out.print("*  History         | THURSDAY  | 8:00 PM - 10:00 PM *\n");
-                        //     }
-                        //     if (!registeredSubjects.contains("Mathematics")) {
-                        //         System.out.print("*  Mathematics     | TUESDAY   | 8:00 PM - 10:00 PM *\n");
-                        //     }
-                        //     if (!registeredSubjects.contains("Science")) {
-                        //         System.out.print("*  Science         | WEDNESDAY | 8:00 PM - 10:00 PM *\n");
-                        //     }
+                        // if (!registeredSubjects.contains("Malay")) {
+                        // System.out.print("* Malay | FRIDAY | 8:00 PM - 10:00 PM *\n");
+                        // }
+                        // if (!registeredSubjects.contains("English")) {
+                        // System.out.print("* English | MONDAY | 8:00 PM - 10:00 PM *\n");
+                        // }
+                        // if (!registeredSubjects.contains("History")) {
+                        // System.out.print("* History | THURSDAY | 8:00 PM - 10:00 PM *\n");
+                        // }
+                        // if (!registeredSubjects.contains("Mathematics")) {
+                        // System.out.print("* Mathematics | TUESDAY | 8:00 PM - 10:00 PM *\n");
+                        // }
+                        // if (!registeredSubjects.contains("Science")) {
+                        // System.out.print("* Science | WEDNESDAY | 8:00 PM - 10:00 PM *\n");
+                        // }
 
-                        //     System.out.print("*******************************************************\n");
-                        //     System.out.print("Enter course details (subject):\n");
-                        //     String subject = scanner.nextLine();
+                        // System.out.print("*******************************************************\n");
+                        // System.out.print("Enter course details (subject):\n");
+                        // String subject = scanner.nextLine();
 
-                        //     List<String> validSubjects = List.of("Malay", "English", "History", "Mathematics",
-                        //             "Science");
+                        // List<String> validSubjects = List.of("Malay", "English", "History",
+                        // "Mathematics",
+                        // "Science");
 
-                        //     if (validSubjects.contains(subject) && !registeredSubjects.contains(subject)) {
-                        //         Day day = getDayBySubject(subject);
-                        //         Tutor tutor = tutors.get(count++ % tutors.size()); // Assigning first tutor for
-                        //                                                            // simplicity
-                        //         double price = 50.0; // Assuming a fixed price
-                        //         int lessonId = Lesson.getLessons().size() + 1;
-                        //         Lesson.addLesson(lessonId, subject, tutor, student, price, day);
+                        // if (validSubjects.contains(subject) && !registeredSubjects.contains(subject))
+                        // {
+                        // Day day = getDayBySubject(subject);
+                        // Tutor tutor = tutors.get(count++ % tutors.size()); // Assigning first tutor
+                        // for
+                        // // simplicity
+                        // double price = 50.0; // Assuming a fixed price
+                        // int lessonId = Lesson.getLessons().size() + 1;
+                        // Lesson.addLesson(lessonId, subject, tutor, student, price, day);
 
-                        //         while (true) {
-                        //             System.out.println("Do you want to register another subject? (yes/no)");
-                        //             String response = scanner.nextLine();
-                        //             if (response.equalsIgnoreCase("yes")) {
-                        //                 registerAnother = true;
-                        //                 break;
-                        //             } else if (response.equalsIgnoreCase("no")) {
-                        //                 List<Lesson> studentLessons = Lesson.getLessons().stream()
-                        //                         .filter(lesson -> lesson.getStudent().equals(student))
-                        //                         .collect(Collectors.toList());
+                        // while (true) {
+                        // System.out.println("Do you want to register another subject? (yes/no)");
+                        // String response = scanner.nextLine();
+                        // if (response.equalsIgnoreCase("yes")) {
+                        // registerAnother = true;
+                        // break;
+                        // } else if (response.equalsIgnoreCase("no")) {
+                        // List<Lesson> studentLessons = Lesson.getLessons().stream()
+                        // .filter(lesson -> lesson.getStudent().equals(student))
+                        // .collect(Collectors.toList());
 
-                        //                 System.out.println("\n\nSubjects registered:");
-                        //                 System.out.println("*****************************************************");
-                        //                 System.out.println("*  Subject         | Day       | Time               *");
-                        //                 System.out.println("*****************************************************");
-                        //                 for (Lesson lesson : studentLessons) {
-                        //                     System.out.printf("*  %-16s| %-10s| %-19s*%n", lesson.getSubject(),
-                        //                             lesson.getDay(), getClassTime(lesson.getSubject()));
-                        //                 }
-                        //                 System.out.println("*****************************************************");
+                        // System.out.println("\n\nSubjects registered:");
+                        // System.out.println("*****************************************************");
+                        // System.out.println("* Subject | Day | Time *");
+                        // System.out.println("*****************************************************");
+                        // for (Lesson lesson : studentLessons) {
+                        // System.out.printf("* %-16s| %-10s| %-19s*%n", lesson.getSubject(),
+                        // lesson.getDay(), getClassTime(lesson.getSubject()));
+                        // }
+                        // System.out.println("*****************************************************");
 
-                        //                 double totalPrice = Lesson.calculateTotalFeePerMonth(student);
-                        //                 System.out.println("\nTotal price to pay: $" + totalPrice + "\n");
-                        //                 // schedule.displayLessonsForStudent(student);
-                        //                 registerAnother = false;
-                        //                 break;
-                        //             } else {
-                        //                 System.out.println("Invalid input. Please enter 'yes' or 'no'.");
-                        //             }
-                        //         }
-                        //     } else {
-                        //         System.out.println(
-                        //                 "Invalid subject or already registered. Please enter a valid subject.");
-                        //         registerAnother = true;
-                        //     }
+                        // double totalPrice = Lesson.calculateTotalFeePerMonth(student);
+                        // System.out.println("\nTotal price to pay: $" + totalPrice + "\n");
+                        // // schedule.displayLessonsForStudent(student);
+                        // registerAnother = false;
+                        // break;
+                        // } else {
+                        // System.out.println("Invalid input. Please enter 'yes' or 'no'.");
+                        // }
+                        // }
+                        // } else {
+                        // System.out.println(
+                        // "Invalid subject or already registered. Please enter a valid subject.");
+                        // registerAnother = true;
+                        // }
                         // } while (registerAnother);
                         firstTime = false;
                         break;
@@ -300,22 +304,22 @@ public class HomeTuitionSystem {
                         System.out.print("Enter course subject to delete: ");
                         // String courseToDelete = scanner.nextLine();
                         // schedule.removeLesson(student.getName(), courseToDelete);
-    
+
                         // // Display updated subjects after deletion
                         // List<Lesson> updatedLessons = Lesson.getLessons().stream()
-                        //         .filter(lesson -> lesson.getStudent().equals(student))
-                        //         .collect(Collectors.toList());
-    
+                        // .filter(lesson -> lesson.getStudent().equals(student))
+                        // .collect(Collectors.toList());
+
                         // System.out.println("\n\nUpdated subjects registered:");
                         // System.out.println("*****************************************************");
-                        // System.out.println("*  Subject         | Day       | Time               *");
+                        // System.out.println("* Subject | Day | Time *");
                         // System.out.println("*****************************************************");
                         // for (Lesson lesson : updatedLessons) {
-                        //     System.out.printf("*  %-16s| %-10s| %-19s*%n", lesson.getSubject(),
-                        //             lesson.getDay(), getClassTime(lesson.getSubject()));
+                        // System.out.printf("* %-16s| %-10s| %-19s*%n", lesson.getSubject(),
+                        // lesson.getDay(), getClassTime(lesson.getSubject()));
                         // }
                         // System.out.println("*****************************************************");
-    
+
                         break;
 
                     case 4:
@@ -328,7 +332,7 @@ public class HomeTuitionSystem {
             }
         }
     }
-    
+
     private Day getDayBySubject(String subject) {
         switch (subject.toLowerCase()) {
             case "malay":

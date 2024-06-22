@@ -17,9 +17,6 @@ class Schedule {
                     && lesson.getSubject().equalsIgnoreCase(subject));
     }
     
-    
-
-    
     public void displayLessonsForTutor(Tutor tutor) {
         for (Lesson lesson : lessons) {
             if (lesson.getTutor().equals(tutor)) {

@@ -20,6 +20,7 @@ public class Lesson {
         this.day = day;
         lessons.add(this);
     }
+    // good
 
     // Getters
     public int getLessonId() {

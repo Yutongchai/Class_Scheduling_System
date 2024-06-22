@@ -151,7 +151,23 @@ public class HomeTuitionSystem {
                     case 3:
                         System.out.print("Enter course subject to delete: ");
                         String courseToDelete = scanner.nextLine();
-                        schedule.removeLessonForStudent(student, courseToDelete);
+                        schedule.removeLesson(student.getName(), courseToDelete);
+    
+                        // Display updated subjects after deletion
+                        List<Lesson> updatedLessons = Lesson.getLessons().stream()
+                                .filter(lesson -> lesson.getStudent().equals(student))
+                                .collect(Collectors.toList());
+    
+                        System.out.println("\n\nUpdated subjects registered:");
+                        System.out.println("*****************************************************");
+                        System.out.println("*  Subject         | Day       | Time               *");
+                        System.out.println("*****************************************************");
+                        for (Lesson lesson : updatedLessons) {
+                            System.out.printf("*  %-16s| %-10s| %-19s*%n", lesson.getSubject(),
+                                    lesson.getDay(), getClassTime(lesson.getSubject()));
+                        }
+                        System.out.println("*****************************************************");
+    
                         break;
 
                     case 4:

@@ -71,7 +71,7 @@ public class Lesson {
         System.out.println("Student " + student.getName() + " registered for " + subject + " with tutor "
                 + tutor.getName() + " on " + day + ". Lesson ID: " + lessonId);
     }
-
+    
     // Method to get all lessons
     public static List<Lesson> getLessons() {
         return lessons;

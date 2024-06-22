@@ -1,20 +1,23 @@
 import java.util.ArrayList;
+import java.util.List;
 
 class Schedule {
     private ArrayList<Lesson> lessons;
 
-    public Schedule() {
-        lessons = new ArrayList<>();
-    }
+    public Schedule() {}
 
     public void addLesson(Lesson lesson) {
         lessons.add(lesson);
     }
 
-    public void removeLessonForStudent(Student student, String subject) {
+    public void removeLesson(String studentName, String subject) {
+        List<Lesson> lessons = Lesson.getLessons();
         lessons.removeIf(
-                lesson -> lesson.getStudent().equals(student) && lesson.getSubject().equalsIgnoreCase(subject));
+            lesson -> lesson.getStudent().getName().equalsIgnoreCase(studentName) 
+                    && lesson.getSubject().equalsIgnoreCase(subject));
     }
+    
+    
 
     // // Display lessons for a specific student in a timetable style
     // public void displayLessonsForStudent(Student student) {

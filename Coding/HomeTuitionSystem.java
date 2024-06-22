@@ -57,14 +57,15 @@ public class HomeTuitionSystem {
                                     .filter(lesson -> lesson.getStudent().equals(student))
                                     .collect(Collectors.toList());
                             System.out.println("\n\nSubjects registered:");
-                            System.out.println("*****************************************************");
-                            System.out.println("*  Subject         | Day       | Time               *");
-                            System.out.println("*****************************************************");
+                            System.out.println("*************************************************************");
+                            System.out.println("*  Subject         | Tutor       | Day       | Time         *");
+                            System.out.println("*************************************************************");
                             for (Lesson lesson : studentLessons) {
-                                System.out.printf("*  %-16s| %-10s| %-19s*%n", lesson.getSubject(),
-                                        lesson.getDay(), getClassTime(lesson.getSubject()));
+                                System.out.printf("*  %-16s| %-12s| %-10s| %-12s*%n", lesson.getSubject(),
+                                        lesson.getTutor().getName(), lesson.getDay(),
+                                        getClassTime(lesson.getSubject()));
                             }
-                            System.out.println("*****************************************************");
+                            System.out.println("*************************************************************");
                         }
                         break;
                     case 2:
@@ -116,14 +117,19 @@ public class HomeTuitionSystem {
                                                 .collect(Collectors.toList());
 
                                         System.out.println("\n\nSubjects registered:");
-                                        System.out.println("*****************************************************");
-                                        System.out.println("*  Subject         | Day       | Time               *");
-                                        System.out.println("*****************************************************");
+                                        System.out.println(
+                                                "*************************************************************");
+                                        System.out.println(
+                                                "*  Subject         | Tutor       | Day       | Time         *");
+                                        System.out.println(
+                                                "*************************************************************");
                                         for (Lesson lesson : studentLessons) {
-                                            System.out.printf("*  %-16s| %-10s| %-19s*%n", lesson.getSubject(),
-                                                    lesson.getDay(), getClassTime(lesson.getSubject()));
+                                            System.out.printf("*  %-16s| %-12s| %-10s| %-12s*%n", lesson.getSubject(),
+                                                    lesson.getTutor().getName(), lesson.getDay(),
+                                                    getClassTime(lesson.getSubject()));
                                         }
-                                        System.out.println("*****************************************************");
+                                        System.out.println(
+                                                "*************************************************************");
 
                                         double totalPrice = Lesson.calculateTotalFeePerMonth(student);
                                         System.out.println("\nTotal price to pay: $" + totalPrice + "\n");
@@ -152,15 +158,14 @@ public class HomeTuitionSystem {
                                 .collect(Collectors.toList());
 
                         System.out.println("\n\nUpdated subjects registered:");
-                        System.out.println("*****************************************************");
-                        System.out.println("*  Subject         | Day       | Time               *");
-                        System.out.println("*****************************************************");
+                        System.out.println("*************************************************************");
+                        System.out.println("*  Subject         | Tutor       | Day       | Time         *");
+                        System.out.println("*************************************************************");
                         for (Lesson lesson : updatedLessons) {
-                            System.out.printf("*  %-16s| %-10s| %-19s*%n", lesson.getSubject(),
-                                    lesson.getDay(), getClassTime(lesson.getSubject()));
+                            System.out.printf("*  %-16s| %-12s| %-10s| %-12s*%n", lesson.getSubject(),
+                                    lesson.getTutor().getName(), lesson.getDay(), getClassTime(lesson.getSubject()));
                         }
-                        System.out.println("*****************************************************");
-
+                        System.out.println("*************************************************************");
                         break;
 
                     case 4:

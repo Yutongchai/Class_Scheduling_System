@@ -19,7 +19,16 @@ public class Init {
         homeTuitionSystem.addTutor(tutor4);
         homeTuitionSystem.addTutor(tutor5);
 
-        homeTuitionSystem.studentInterface((Student) personLoggedIn, input);
+        // homeTuitionSystem.studentInterface((Student) personLoggedIn, input);
+        // homeTuitionSystem.tutorInterface((Tutor) personLoggedIn, input);
+
+        if (personLoggedIn instanceof Student) {
+            homeTuitionSystem.studentInterface((Student) personLoggedIn, input);
+        } else if (personLoggedIn instanceof Tutor) {
+            homeTuitionSystem.tutorInterface((Tutor) personLoggedIn, input);
+        } else {
+            System.out.println("Logged in user is not recognized as a student or a tutor. Exiting...");
+        }
 
         input.close();
     }

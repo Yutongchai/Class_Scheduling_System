@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.List;
 
 public class Tutor extends Person {
     private String subject;
@@ -41,5 +42,9 @@ public class Tutor extends Person {
     @Override
     public String getDetails() {
         return super.getDetails() + ", Subject: " + subject;
+    }
+
+    public List<Student> getStudentList() {
+        return studentList;
     }
 }

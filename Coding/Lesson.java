@@ -1,6 +1,7 @@
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 public class Lesson {
@@ -74,7 +75,8 @@ public class Lesson {
         totalFee += lesson.getPrice(); // Accumulate total fee
         System.out.println("Student " + student.getName() + " registered for " + subject + " with tutor "
                 + tutor.getName() + " on " + day + ". Lesson ID: " + lessonId);
-        System.out.println("Tuition fee so far: $" + totalFee); // Print the total fee after adding the lesson
+        System.out.println("\nTuition fee so far: $" + totalFee); // Print the total fee after adding the lesson
+        System.out.println();
     }
 
     // Method to get all lessons
@@ -91,7 +93,8 @@ public class Lesson {
                     .map(Lesson::getSubject)
                     .collect(Collectors.toList());
 
-            System.out.println("List of subjects offered:");
+            System.out.println("\nList of subjects offered:");
+            System.out.println(" ");
             System.out.println("*******************************************************************");
             System.out.println("*  Subject         | Tutor       | Day       | Time               *");
             System.out.println("*******************************************************************");
@@ -111,6 +114,7 @@ public class Lesson {
                 }
             }
             System.out.println("*******************************************************************");
+            System.out.println(" ");
 
             System.out.print("Enter course details (subject): ");
             String subject = scanner.nextLine().trim();
@@ -135,10 +139,41 @@ public class Lesson {
         } while (registerAnother);
     }
 
+    //Method to delete a course for a student
+    public static void deleteCourse(Student student, Schedule schedule, Scanner scanner) {
+        List<Lesson> studentLessons = lessons.stream()
+                .filter(lesson -> lesson.getStudent().equals(student))
+                .collect(Collectors.toList());
+
+        if (studentLessons.isEmpty()) {
+            System.out.println("No subjects to delete.");
+            return;
+        }
+
+        Set<String> uniqueSubjects = studentLessons.stream()
+                .map(Lesson::getSubject)
+                .collect(Collectors.toSet());
+
+        System.out.println("Subjects registered:");
+        uniqueSubjects.forEach(System.out::println);
+
+        System.out.print("\nEnter course subject to delete: ");
+        String courseToDelete = scanner.nextLine();
+
+        if (uniqueSubjects.contains(courseToDelete)) {
+            lessons.removeIf(lesson -> lesson.getStudent().equals(student)
+                    && lesson.getSubject().equalsIgnoreCase(courseToDelete));
+            schedule.removeLesson(student.getName(), courseToDelete);
+            System.out.println("Subject " + courseToDelete + " has been deleted.");
+        } else {
+            System.out.println("Subject not found. Please enter a valid subject.");
+        }
+    }
+
     // Method to prompt for another course registration
     private static boolean promptForAnotherCourse(Scanner scanner) {
         while (true) {
-            System.out.println("Do you want to register another subject? (yes/no)");
+            System.out.println("\nDo you want to register another subject? (yes/no)");
             String response = scanner.nextLine();
             if (response.equalsIgnoreCase("yes")) {
                 return true;
@@ -192,33 +227,4 @@ public class Lesson {
 }
 
 
-/*  Method to delete a course for a student
-    public static void deleteCourse(Student student, Schedule schedule, Scanner scanner) {
-        List<Lesson> studentLessons = lessons.stream()
-                .filter(lesson -> lesson.getStudent().equals(student))
-                .collect(Collectors.toList());
 
-        if (studentLessons.isEmpty()) {
-            System.out.println("No subjects to delete.");
-            return;
-        }
-
-        Set<String> uniqueSubjects = studentLessons.stream()
-                .map(Lesson::getSubject)
-                .collect(Collectors.toSet());
-
-        System.out.println("Subjects registered:");
-        uniqueSubjects.forEach(System.out::println);
-
-        System.out.print("Enter course subject to delete: ");
-        String courseToDelete = scanner.nextLine();
-
-        if (uniqueSubjects.contains(courseToDelete)) {
-            lessons.removeIf(lesson -> lesson.getStudent().equals(student)
-                    && lesson.getSubject().equalsIgnoreCase(courseToDelete));
-            schedule.removeLesson(student.getName(), courseToDelete);
-            System.out.println("Subject " + courseToDelete + " has been deleted.");
-        } else {
-            System.out.println("Subject not found. Please enter a valid subject.");
-        }
-    }*/

@@ -50,15 +50,15 @@ class Schedule {
                     .filter(lesson -> lesson.getStudent().equals(student))
                     .collect(Collectors.toList());
             System.out.println("\n\nSubjects registered:");
-            System.out.println("******************************************************************");
-            System.out.println("*  Subject         | Tutor       | Day       | Time              *");
-            System.out.println("******************************************************************");
+            System.out.println("*******************************************************************");
+            System.out.println("*  Subject         | Tutor       | Day       | Time               *");
+            System.out.println("*******************************************************************");
             for (Lesson lesson : studentLessons) {
                 System.out.printf("*  %-16s| %-12s| %-10s| %-12s*%n", lesson.getSubject(),
                         lesson.getTutor().getName(), lesson.getDay(),
                         getClassTime(lesson.getSubject()));
             }
-            System.out.println("******************************************************************");
+            System.out.println("*******************************************************************");
 
         }
     }

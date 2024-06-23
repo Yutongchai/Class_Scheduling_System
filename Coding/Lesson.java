@@ -139,7 +139,7 @@ public class Lesson {
         } while (registerAnother);
     }
 
-    //Method to delete a course for a student
+    // Method to delete a course for a student
     public static void deleteCourse(Student student, Schedule schedule, Scanner scanner) {
         List<Lesson> studentLessons = lessons.stream()
                 .filter(lesson -> lesson.getStudent().equals(student))
@@ -154,17 +154,25 @@ public class Lesson {
                 .map(Lesson::getSubject)
                 .collect(Collectors.toSet());
 
-        System.out.println("Subjects registered:");
+        System.out.println("\nSubjects registered:");
         uniqueSubjects.forEach(System.out::println);
 
         System.out.print("\nEnter course subject to delete: ");
         String courseToDelete = scanner.nextLine();
 
         if (uniqueSubjects.contains(courseToDelete)) {
+            double priceToRemove = studentLessons.stream()
+                    .filter(lesson -> lesson.getSubject().equalsIgnoreCase(courseToDelete))
+                    .mapToDouble(Lesson::getPrice)
+                    .findFirst()
+                    .orElse(0.0);
+
             lessons.removeIf(lesson -> lesson.getStudent().equals(student)
                     && lesson.getSubject().equalsIgnoreCase(courseToDelete));
             schedule.removeLesson(student.getName(), courseToDelete);
-            System.out.println("Subject " + courseToDelete + " has been deleted.");
+            totalFee -= priceToRemove; // Subtract price of the deleted lesson from totalFee
+            System.out.println("\nSubject " + courseToDelete + " has been deleted.");
+            System.out.println("Tuition fee after deletion: $" + totalFee); // Print the total fee after deletion
         } else {
             System.out.println("Subject not found. Please enter a valid subject.");
         }
@@ -225,6 +233,3 @@ public class Lesson {
                 ", day=" + day + "]";
     }
 }
-
-
-

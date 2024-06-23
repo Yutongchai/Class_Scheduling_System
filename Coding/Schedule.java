@@ -35,7 +35,7 @@ class Schedule {
         System.out.println("******************************************************************");
 
         for (Lesson lesson : tutorLessons) {
-            System.out.printf("*  %-16s| %-12s| %-10s| %-12s*%n", lesson.getSubject(),
+            System.out.printf("*  %-16s| %-12s| %-10s| %-12s *%n", lesson.getSubject(),
                     lesson.getStudent().getName(), lesson.getDay(),
                     getClassTime(lesson.getSubject()));
         }
@@ -54,7 +54,7 @@ class Schedule {
             System.out.println("*  Subject         | Tutor       | Day       | Time               *");
             System.out.println("*******************************************************************");
             for (Lesson lesson : studentLessons) {
-                System.out.printf("*  %-16s| %-12s| %-10s| %-12s*%n", lesson.getSubject(),
+                System.out.printf("*  %-16s| %-12s| %-10s| %-12s *%n", lesson.getSubject(),
                         lesson.getTutor().getName(), lesson.getDay(),
                         getClassTime(lesson.getSubject()));
             }

@@ -1,43 +1,28 @@
-import java.io.File;
-import java.io.FileNotFoundException;
 import java.util.Scanner;
 
 public class Init {
     public static void main(String[] args) {
         Scanner input = new Scanner(System.in);
         Login login = new Login();
+        
+        // Perform login
         Person personLoggedIn = login.loginInterface(input);
 
-        HomeTuitionSystem homeTuitionSystem = new HomeTuitionSystem();
+        // Check if login was successful
+        if (personLoggedIn != null) {
+            HomeTuitionSystem homeTuitionSystem = new HomeTuitionSystem();
 
-        try {
-            File myObj = new File("Tutor.txt");
-            Scanner myReader = new Scanner(myObj);
-            while (myReader.hasNextLine()) {
-                String data = myReader.nextLine();
-                String[] tutorData = data.split(",");
-                String gender = tutorData[0];
-                String name = tutorData[1];
-                String email = tutorData[2];
-                String phone = tutorData[3];
-                String subject = tutorData[4];
-
-                Tutor tutor = new Tutor(gender, name, email, phone, subject.trim()); // Trim to remove leading/trailing
-                                                                                     // spaces
-                homeTuitionSystem.addTutor(tutor);
+            // Determine the interface based on the logged-in person
+            if (personLoggedIn instanceof Student) {
+                homeTuitionSystem.studentInterface((Student) personLoggedIn, input);
+            } else if (personLoggedIn instanceof Tutor) {
+                homeTuitionSystem.adminInterface((Tutor) personLoggedIn, input);
+            } else {
+                System.out.println("Logged in user is not recognized as a student or an admin. Exiting...");
             }
-            myReader.close();
-        } catch (FileNotFoundException e) {
-            System.out.println("File 'Tutor.txt' not found or could not be read.");
-            e.printStackTrace();
-        }
-
-        if (personLoggedIn instanceof Student) {
-            homeTuitionSystem.studentInterface((Student) personLoggedIn, input);
-        } else if (personLoggedIn instanceof Tutor) {
-            homeTuitionSystem.tutorInterface((Tutor) personLoggedIn, input);
+            
         } else {
-            System.out.println("Logged in user is not recognized as a student or a tutor. Exiting...");
+            System.out.println("Login failed. Exiting...");
         }
 
         input.close();

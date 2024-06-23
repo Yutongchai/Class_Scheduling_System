@@ -72,10 +72,11 @@ public class HomeTuitionSystem {
         }
     }
 
-    public void tutorInterface(Tutor tutor, Scanner scanner) {
+    public void adminInterface(Tutor tutor, Scanner scanner) {
         while (true) {
             System.out.println("\n1. View Schedule");
-            System.out.println("2. Logout");
+            System.out.println("\n2. View Student List");
+            System.out.println("3. Logout");
 
             if (scanner.hasNextInt()) {
                 int choice = scanner.nextInt();
@@ -86,6 +87,9 @@ public class HomeTuitionSystem {
                         schedule.displayTutorSchedule(tutor);
                         break;
                     case 2:
+                        tutor.displayStudentList();
+                        break;
+                    case 3:
                         return;
                     default:
                         System.out.println("Invalid choice. Please try again.");

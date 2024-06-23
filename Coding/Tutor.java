@@ -1,13 +1,14 @@
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Tutor extends Person {
     private String subject;
     private ArrayList<Student> studentList;
     private ArrayList<Lesson> lessonList;
 
-    public Tutor(String type, String name, String email, String phoneNumber, String subject) {
-        super("Tutor", name, email, phoneNumber);
+    public Tutor(String gender, String name, String username, String password, String email, String phoneNumber, String subject) {
+        super(name, username, password, email, phoneNumber);
         this.subject = subject;
         this.studentList = new ArrayList<>();
         this.lessonList = new ArrayList<>();
@@ -25,17 +26,25 @@ public class Tutor extends Person {
     public void addLesson(Lesson lesson) {
         lessonList.add(lesson);
         System.out.println("Lesson added: " + lesson.toString());
-    }
-
-    public void displayInfo() {
-        System.out.println("Tutor: " + getName() + ", Subject: " + subject);
-        System.out.println("Students:");
-        for (Student student : studentList) {
-            System.out.println(" - " + student.getDetails());
         }
-        System.out.println("Lessons:");
-        for (Lesson lesson : lessonList) {
-            System.out.println(" - " + lesson.toString());
+        
+    public List<Student> getStudentList() {
+        return Lesson.getLessons().stream()
+            .filter(lesson -> lesson.getTutor().equals(this))
+            .map(Lesson::getStudent)
+            .distinct()
+            .collect(Collectors.toList());
+    }
+    public void displayStudentList() {
+        System.out.println("Tutor: " + getName() + ", Subject: " + subject);
+        List<Student> students = getStudentList();
+        if (students.isEmpty()) {
+            System.out.println("No students registered for " + subject + ".");
+        } else {
+            System.out.println("Students registered for " + subject + ":");
+            for (Student student : students) {
+                System.out.println("- " + student.getName());
+            }
         }
     }
 
@@ -44,7 +53,4 @@ public class Tutor extends Person {
         return super.getDetails() + ", Subject: " + subject;
     }
 
-    public List<Student> getStudentList() {
-        return studentList;
-    }
 }

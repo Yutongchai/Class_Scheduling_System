@@ -1,21 +1,24 @@
+import java.io.*;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
 
 public class Login {
     private Map<String, String> studentCredentials;
-    private Map<String, String> tutorCredentials;
+    private Map<String, String> adminCredentials;
+
+    private static final String STUDENT_FILE = "student.txt";
 
     public Login() {
         studentCredentials = new HashMap<>();
-        tutorCredentials = new HashMap<>();
-        // Sample student and tutor credentials (username, password)
-        studentCredentials.put("student1", "password1");
-        tutorCredentials.put("tutor1", "password1");
+        adminCredentials = new HashMap<>();
+        // Initialize admin credentials (assuming they are fixed)
+        adminCredentials.put("admin", "admin1");
+        loadStudentCredentials();  // Load student credentials from file on object creation
     }
 
     public Person loginInterface(Scanner scanner) {
-        System.out.println("Login as (student/tutor): ");
+        System.out.println("Login as (student/Admin): ");
         String userType = scanner.nextLine();
 
         System.out.println("Enter username: ");
@@ -32,14 +35,29 @@ public class Login {
                 return getStudentByUsername(username);
             } else {
                 System.out.println("Login failed. Invalid credentials.");
-                return null;
+
+                // Ask if the student wants to register a new account
+                System.out.println("Do you want to register a new account? (yes/no): ");
+                String choice = scanner.nextLine().trim();
+
+                if (choice.equalsIgnoreCase("yes")) {
+                    System.out.println("Enter username for registration: ");
+                    String newUsername = scanner.nextLine().trim();
+
+                    System.out.println("Enter password for registration: ");
+                    String newPassword = scanner.nextLine().trim();
+
+                    registerStudent(newUsername, newPassword);
+                    return getStudentByUsername(newUsername);
+                } else {
+                    return null;
+                }
             }
-        } else if (userType.equalsIgnoreCase("tutor")) {
-            if (tutorCredentials.containsKey(username) && tutorCredentials.get(username).equals(password)) {
-                System.out.println("Login successful as tutor.");
-                // Fetch tutor details from the system
-                // Assuming we have a method to get a tutor object by username
-                return getTutorByUsername(username);
+        } else if (userType.equalsIgnoreCase("admin")) {
+            if (adminCredentials.containsKey(username) && adminCredentials.get(username).equals(password)) {
+                System.out.println("Login successful as Admin.");
+                // Implement admin functionality here
+                return null; // or return an admin object if needed
             } else {
                 System.out.println("Login failed. Invalid credentials.");
                 return null;
@@ -48,22 +66,59 @@ public class Login {
             System.out.println("Invalid user type.");
             return null;
         }
-
     }
 
-    // Placeholder methods to simulate fetching a student or tutor by username
-    private Student getStudentByUsername(String username) {
-        // Implement logic to fetch student by username
-        // For now, returning a dummy student
-        return new Student("Student", username, "student@example.com", "1234567890", "Grade 10");
+    private void loadStudentCredentials() {
+        try (BufferedReader reader = new BufferedReader(new FileReader(STUDENT_FILE))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                String[] parts = line.split(" ");
+                if (parts.length >= 2) {
+                    String username = parts[2]; // assuming username is at index 0
+                    String password = parts[3]; // assuming password is at index 1
+                    studentCredentials.put(username, password);
+                }
+            }
+        } catch (IOException e) {
+            System.out.println("Error loading student credentials: " + e.getMessage());
+        }
     }
 
-    private Tutor getTutorByUsername(String username) {
-        // Implement logic to fetch tutor by username
-        // For now, returning a dummy tutor
-        return new Tutor("Tutor", username, "123 Main St", "1234567890", "Math");
+    public void registerStudent(String username, String password) {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(STUDENT_FILE, true))) {
+            writer.write(username + " " + password);
+            writer.newLine();
+            writer.flush();
+            studentCredentials.put(username, password);
+            System.out.println("Registration successful for student: " + username);
+        } catch (IOException e) {
+            System.out.println("Error registering student: " + e.getMessage());
+        }
+    }
+
+    private Person getStudentByUsername(String username) {
+        try (BufferedReader reader = new BufferedReader(new FileReader(STUDENT_FILE))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                String[] parts = line.split("\\s+"); // Split by whitespace
+                if (parts.length >= 4) {
+                    String fileUsername = parts[2]; // Username is at index 2
+                    String password = parts[3]; // Password is at index 3
+
+                    if (fileUsername.equals(username)) {
+                        // Return a Student object with the matched username
+                        return new Student(username); // Assuming Student class constructor accepts username
+                    }
+                }
+            }
+        } catch (IOException e) {
+            System.out.println("Error reading student file: " + e.getMessage());
+        }
+        return null; // Return null if username is not found
     }
 }
+
+
 
 /*
  * import java.util.HashMap;

@@ -2,4 +2,4 @@ Male, Hakim, Hakim@gmail.com, 019-7882345, Mathematics
 Female, Rahimah, rahimah@gmail.com, 014-8890067, Malay
 Female, Azizah, azizah@gmail.com, 014-8890089, Science
 Female, Bharates, bharates@gmail.com, 014-8890033, English
-Female, Maizurah, maizurah@gmail.com, 018-8890077, History
+Female, Maizurah, history, passHistory, maizurah@gmail.com, 018-8890077, History

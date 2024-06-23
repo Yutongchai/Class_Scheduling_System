@@ -1,20 +1,24 @@
 public class Student extends Person {
     private String grade;
-    //private Schedule schedule;
 
-    public Student(String type, String name, String email, String phoneNumber, String grade) {
-        super("Student", name, email, phoneNumber);
+    public Student(String name, String username, String password, String email, String phoneNumber, String grade) {
+        super(name, username, password, email, phoneNumber);
         this.grade = grade;
     }
 
+    public Student(String username) {
+        super(username);
+    }
 
     public String getGrade() {
         return grade;
     }
 
-    public void setGrade(String newgrade) {
-        grade = newgrade;
+    @Override
+    public String toString() {
+        return super.toString() + " " + grade;
     }
+
 
     public void enrollLesson(Lesson lesson) {
         // Enrollment logic here

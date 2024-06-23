@@ -1,17 +1,17 @@
-import java.io.BufferedWriter;
+/*import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.Scanner;
+import java.util.Scanner;*/
 
 public class Admin extends Person {
 
-    private static final String TUTOR_FILE = "tutor.txt";
+   //private static final String TUTOR_FILE = "tutor.txt";
 
     public Admin(String username, String password) {
         super(username, password);
     }
 
-    public void registerTutor(Scanner scanner) {
+    /*public void registerTutor(Scanner scanner) {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(TUTOR_FILE, true))) {
             System.out.print("Enter gender: ");
             String gender = scanner.nextLine().trim();
@@ -40,5 +40,5 @@ public class Admin extends Person {
         } catch (IOException e) {
             System.out.println("Error adding tutor: " + e.getMessage());
         }
-    }
+    }*/
 }

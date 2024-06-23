@@ -75,10 +75,9 @@ public class HomeTuitionSystem {
     public void adminInterface(Admin admin, Scanner scanner) {
         while (true) {
             System.out.println("\nAdmin Interface:");
-            System.out.println("1. Add Tutor");
-            System.out.println("2. View Tutor List");
-            System.out.println("3. View Student List");
-            System.out.println("4. Logout");
+            System.out.println("1. View Tutor List");
+            System.out.println("2. View Student List");
+            System.out.println("3. Logout");
 
             if (scanner.hasNextInt()) {
                 int choice = scanner.nextInt();
@@ -86,9 +85,6 @@ public class HomeTuitionSystem {
 
                 switch (choice) {
                     case 1:
-                        admin.registerTutor(scanner);
-                        break;
-                    case 2:
                         System.out.println("Viewing tutor list...");
                         System.out.println();
                         System.out.print("********************************************************************\n");
@@ -100,7 +96,7 @@ public class HomeTuitionSystem {
                         }
                         System.out.print("********************************************************************\n");
                         break;
-                    case 3:
+                    case 2:
                         System.out.println("Viewing student list...");
                         System.out.println();
                         System.out.print("**********************************************************\n");
@@ -112,7 +108,7 @@ public class HomeTuitionSystem {
                         }
                         System.out.print("*********************************************************\n");
                         break;
-                    case 4:
+                    case 3:
                         System.out.println("Logging out...");
                         return;
                     default:

@@ -89,42 +89,43 @@ public class Lesson {
                     .filter(lesson -> lesson.getStudent().equals(student))
                     .map(Lesson::getSubject)
                     .collect(Collectors.toList());
-
+    
             System.out.println("List of subjects offered:");
             System.out.println("*******************************************************************");
             System.out.println("*  Subject         | Tutor       | Day       | Time               *");
             System.out.println("*******************************************************************");
-
-            // Filter tutors to find available subjects not already registered by the
-            // student
+    
+            // Filter tutors to find available subjects not already registered by the student
             List<String> availableSubjects = tutors.stream()
                     .filter(tutor -> !registeredSubjects.contains(tutor.getSubject()))
                     .map(Tutor::getSubject)
                     .collect(Collectors.toList());
-
+    
             // Display available subjects with their details
             for (Tutor tutor : tutors) {
                 if (availableSubjects.contains(tutor.getSubject())) {
+                    String subject = tutor.getSubject().trim().toLowerCase();
+                    Day day = getDayBySubject(subject);
                     System.out.printf("*  %-16s| %-12s| %-10s| %-12s *%n", tutor.getSubject(),
-                            tutor.getName(), getDayBySubject(tutor.getSubject()), "8:00 PM - 10:00 PM");
+                            tutor.getName(), day != null ? day.toString() : "N/A", "8:00 PM - 10:00 PM");
                 }
             }
             System.out.println("*******************************************************************");
-
+    
             System.out.print("Enter course details (subject): ");
             String subject = scanner.nextLine().trim();
-
+    
             if (availableSubjects.contains(subject)) {
-                Day day = getDayBySubject(subject);
+                Day day = getDayBySubject(subject.toLowerCase());
                 Tutor tutor = tutors.stream()
-                        .filter(t -> t.getSubject().equals(subject))
+                        .filter(t -> t.getSubject().equalsIgnoreCase(subject))
                         .findFirst()
                         .orElse(null); // Assigning first available tutor for simplicity
                 double price = 30.0; // Assuming a fixed price
                 int lessonId = lessons.size() + 1;
                 Lesson.addLesson(lessonId, subject, tutor, student, price, day);
                 schedule.addLesson(new Lesson(lessonId, subject, tutor, student, price, day));
-
+    
                 registerAnother = promptForAnotherCourse(scanner);
             } else {
                 System.out.println("Invalid subject or already registered. Please enter a valid subject.");
@@ -132,7 +133,7 @@ public class Lesson {
             }
         } while (registerAnother);
     }
-
+    
     // Method to delete a course for a student
     public static void deleteCourse(Student student, Schedule schedule, Scanner scanner) {
         List<Lesson> studentLessons = lessons.stream()
@@ -179,7 +180,7 @@ public class Lesson {
         }
     }
 
-    // Utility method to get day by subject
+
     private static Day getDayBySubject(String subject) {
         switch (subject.toLowerCase()) {
             case "malay":
@@ -192,12 +193,15 @@ public class Lesson {
                 return Day.TUESDAY;
             case "science":
                 return Day.WEDNESDAY;
-            case "arabic":
+            case "french":
                 return Day.SATURDAY;
+            case "mandarin":
+                return Day.SUNDAY;
             default:
-                return null; // Or handle unknown subjects appropriately
+                return null;
         }
     }
+    
 
     // toString method
     @Override

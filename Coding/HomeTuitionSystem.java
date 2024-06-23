@@ -56,12 +56,9 @@ public class HomeTuitionSystem {
                     case 3:
                         if (firstTime) {
                             System.out.println("You must register at least one subject before deleting.");
-                        } else {
-                            Lesson.deleteCourse(student, schedule, scanner);
                         }
                         break;
                     case 4:
-                        System.out.println("Student " + student.getName() + " has logged out. Thank You");
                         return;
                     default:
                         System.out.println("Invalid choice. Please try again.");
@@ -110,7 +107,7 @@ public class HomeTuitionSystem {
                         System.out.print("*********************************************************\n");
                         break;
                     case 3:
-                    System.out.println("Admin has logged out. Thank You");
+                        System.out.println("Logging out...");
                         return;
                     default:
                         System.out.println("Invalid choice. Please try again.");

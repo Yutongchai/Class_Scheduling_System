@@ -75,7 +75,7 @@ public class HomeTuitionSystem {
     public void adminInterface(Admin admin, Scanner scanner) {
         while (true) {
             System.out.println("\nAdmin Interface:");
-            System.out.println("1. View Schedule");
+            System.out.println("1. Add Tutor");
             System.out.println("2. View Student List");
             System.out.println("3. Logout");
     
@@ -87,12 +87,10 @@ public class HomeTuitionSystem {
                     case 1:
                         // Implement view schedule logic
                         System.out.println("Viewing schedule...");
-                        schedule.displayAllLessonsWithEnrollment();
                         break;
                     case 2:
                         // Implement view student list logic
                         System.out.println("Viewing student list...");
-                        schedule.displayStudentListByLesson();
                         break;
                     case 3:
                         System.out.println("Logging out...");

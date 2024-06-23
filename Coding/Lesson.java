@@ -60,14 +60,6 @@ public class Lesson {
         }
     }
 
-    // Method to calculate total fee per month for a student
-    public static double calculateTotalFeePerMonth(Student student) {
-        return lessons.stream()
-                .filter(lesson -> lesson.getStudent().equals(student))
-                .mapToDouble(Lesson::getPrice)
-                .sum();
-    }
-
     // Method to add a new lesson for a student
     public static void addLesson(int lessonId, String subject, Tutor tutor, Student student, double price, Day day) {
         Lesson lesson = new Lesson(lessonId, subject, tutor, student, price, day);
@@ -233,3 +225,12 @@ public class Lesson {
                 ", day=" + day + "]";
     }
 }
+
+
+/* Method to calculate total fee per month for a student
+public static double calculateTotalFeePerMonth(Student student) {
+    return lessons.stream()
+            .filter(lesson -> lesson.getStudent().equals(student))
+            .mapToDouble(Lesson::getPrice)
+            .sum();
+}*/

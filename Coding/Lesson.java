@@ -206,16 +206,5 @@ public class Lesson {
                 ", day=" + day + "]";
     }
 
-    // Static method to get subject enrollment data
-    public static Map<String, Long> getSubjectEnrollment() {
-        return lessons.stream()
-                .collect(Collectors.groupingBy(Lesson::getSubject, Collectors.counting()));
-    }
-
-    // Static method to get student list for each subject
-    public static Map<String, List<Student>> getStudentListForSubjects() {
-        return lessons.stream()
-                .collect(Collectors.groupingBy(Lesson::getSubject,
-                        Collectors.mapping(Lesson::getStudent, Collectors.toList())));
-    }
+    
 }

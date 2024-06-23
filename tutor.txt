@@ -3,3 +3,5 @@ Female, Rahimah, rahimah@gmail.com, 014-8890067, Malay
 Female, Azizah, azizah@gmail.com, 014-8890089, Science
 Female, Bharates, bharates@gmail.com, 014-8890033, English
 Female, Maizurah, maizurah@gmail.com, 018-8890077, History
+Male, Abu, abu@gmail.com, 012-2345678, Mandarin
+Female, Ain, ain@gmail.com, 011-9876543, French

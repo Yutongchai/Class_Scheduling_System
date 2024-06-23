@@ -28,7 +28,7 @@ public class HomeTuitionSystem {
 
     public void displayTutors() {
         for (Tutor tutor : tutors) {
-            System.out.println(tutor.getDetails());
+            tutor.printDetails();
         }
     }
 
@@ -76,23 +76,43 @@ public class HomeTuitionSystem {
         while (true) {
             System.out.println("\nAdmin Interface:");
             System.out.println("1. Add Tutor");
-            System.out.println("2. View Student List");
-            System.out.println("3. Logout");
-    
+            System.out.println("2. View Tutor List");
+            System.out.println("3. View Student List");
+            System.out.println("4. Logout");
+
             if (scanner.hasNextInt()) {
                 int choice = scanner.nextInt();
                 scanner.nextLine(); // Consume newline
-    
+
                 switch (choice) {
                     case 1:
-                        // Implement view schedule logic
-                        System.out.println("Viewing schedule...");
+                        admin.registerTutor(scanner);
                         break;
                     case 2:
-                        // Implement view student list logic
-                        System.out.println("Viewing student list...");
+                        System.out.println("Viewing tutor list...");
+                        System.out.println();
+                        System.out.print("********************************************************************\n");
+                        System.out.print("*  Name      | Email               | Phone Number   | Subject      *\n");
+                        System.out.print("********************************************************************\n");
+                        for (Tutor tutor : tutors) {
+                            System.out.printf("*  %-10s| %-20s| %-15s| %-12s *\n", tutor.getName(), tutor.getEmail(),
+                                    tutor.getPhoneNumber(), tutor.getSubject());
+                        }
+                        System.out.print("********************************************************************\n");
                         break;
                     case 3:
+                        System.out.println("Viewing student list...");
+                        System.out.println();
+                        System.out.print("*****************************************************\n");
+                        System.out.print("*  Name      | Email               | Phone Number   *\n");
+                        System.out.print("*****************************************************\n");
+                        for (Student student : students) {
+                            System.out.printf("*  %-10s| %-20s| %-15s*\n", student.getName(), student.getEmail(),
+                                    student.getPhoneNumber());
+                        }
+                        System.out.print("*****************************************************\n");
+                        break;
+                    case 4:
                         System.out.println("Logging out...");
                         return;
                     default:
@@ -104,5 +124,5 @@ public class HomeTuitionSystem {
             }
         }
     }
-    
+
 }

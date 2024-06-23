@@ -20,6 +20,12 @@ public abstract class Person {
         this.password = password;
     }
 
+    public Person(String name, String email, String phoneNumber) {
+        this.name = name;
+        this.email = email;
+        this.phoneNumber = phoneNumber;
+    }
+
     public String getType() {
         return type;
     }

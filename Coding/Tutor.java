@@ -7,8 +7,8 @@ public class Tutor extends Person {
     private ArrayList<Student> studentList;
     private ArrayList<Lesson> lessonList;
 
-    public Tutor(String gender, String name, String username, String password, String email, String phoneNumber, String subject) {
-        super(name, username, password, email, phoneNumber);
+    public Tutor(String gender, String name, String email, String phoneNumber, String subject) {
+        super(name, email, phoneNumber);
         this.subject = subject;
         this.studentList = new ArrayList<>();
         this.lessonList = new ArrayList<>();
@@ -48,9 +48,9 @@ public class Tutor extends Person {
         }
     }
 
-    @Override
-    public String getDetails() {
-        return super.getDetails() + ", Subject: " + subject;
+    public void printDetails() {
+        
+        System.out.println();
     }
 
 }

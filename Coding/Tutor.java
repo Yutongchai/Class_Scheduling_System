@@ -1,24 +1,24 @@
-import java.util.ArrayList;
+/*import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
+import java.util.stream.Collectors;*/
 
 public class Tutor extends Person {
     private String subject;
-    private ArrayList<Student> studentList;
-    private ArrayList<Lesson> lessonList;
+    //private ArrayList<Student> studentList;
+    //private ArrayList<Lesson> lessonList;
 
     public Tutor(String gender, String name, String email, String phoneNumber, String subject) {
         super(name, email, phoneNumber);
         this.subject = subject;
-        this.studentList = new ArrayList<>();
-        this.lessonList = new ArrayList<>();
+        //this.studentList = new ArrayList<>();
+        //this.lessonList = new ArrayList<>();
     }
 
     public String getSubject() {
         return subject;
     }
 
-    public void addStudent(Student student) {
+    /*public void addStudent(Student student) {
         studentList.add(student);
         System.out.println("Student " + student.getName() + " added to tutor " + getName() + "'s list.");
     }
@@ -47,7 +47,7 @@ public class Tutor extends Person {
                 System.out.println("- " + student.getName());
             }
         }
-    }
+    }*/
 
     public void printDetails() {
 

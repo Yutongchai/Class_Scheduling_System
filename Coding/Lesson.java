@@ -192,6 +192,8 @@ public class Lesson {
                 return Day.TUESDAY;
             case "science":
                 return Day.WEDNESDAY;
+            case "arabic":
+                return Day.SATURDAY;
             default:
                 return null; // Or handle unknown subjects appropriately
         }

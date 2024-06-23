@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 class Schedule {
@@ -65,5 +66,36 @@ class Schedule {
 
     private String getClassTime(String subject) {
         return "8:00 PM - 10:00 PM"; // Assuming all classes have the same time
+    }
+
+    public void displayAllLessonsWithEnrollment() {
+        Map<String, Long> subjectEnrollment = Lesson.getSubjectEnrollment();
+
+        System.out.println("\nAll Lessons and Enrollments:");
+        System.out.println("**************************************************");
+        System.out.println("*  Subject         | Enrolled Students          *");
+        System.out.println("**************************************************");
+
+        subjectEnrollment.forEach((subject, count) -> {
+            System.out.printf("*  %-16s| %-24d*%n", subject, count);
+        });
+
+        System.out.println("**************************************************");
+    }
+
+    public void displayStudentListByLesson() {
+        Map<String, List<Student>> studentListBySubject = Lesson.getStudentListForSubjects();
+
+        System.out.println("\nStudent List by Lesson:");
+        System.out.println("**************************************************");
+        System.out.println("*  Subject         | Students                    *");
+        System.out.println("**************************************************");
+
+        studentListBySubject.forEach((subject, students) -> {
+            System.out.printf("*  %-16s| %-24s*%n", subject,
+                    students.stream().map(Student::getName).collect(Collectors.joining(", ")));
+        });
+
+        System.out.println("**************************************************");
     }
 }

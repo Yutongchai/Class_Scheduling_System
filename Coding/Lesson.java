@@ -104,8 +104,7 @@ public class Lesson {
             // Display available subjects with their details
             for (Tutor tutor : tutors) {
                 if (availableSubjects.contains(tutor.getSubject())) {
-                    String subject = tutor.getSubject().trim().toLowerCase();
-                    Day day = getDayBySubject(subject);
+                    Day day = getDayBySubject(tutor.getSubject());
                     System.out.printf("*  %-16s| %-12s| %-10s| %-12s *%n", tutor.getSubject(),
                             tutor.getName(), day != null ? day.toString() : "N/A", "8:00 PM - 10:00 PM");
                 }
@@ -116,7 +115,7 @@ public class Lesson {
             String subject = scanner.nextLine().trim();
     
             if (availableSubjects.contains(subject)) {
-                Day day = getDayBySubject(subject.toLowerCase());
+                Day day = getDayBySubject(subject);
                 Tutor tutor = tutors.stream()
                         .filter(t -> t.getSubject().equalsIgnoreCase(subject))
                         .findFirst()
@@ -133,6 +132,7 @@ public class Lesson {
             }
         } while (registerAnother);
     }
+    
     
     // Method to delete a course for a student
     public static void deleteCourse(Student student, Schedule schedule, Scanner scanner) {
@@ -182,25 +182,25 @@ public class Lesson {
 
 
     private static Day getDayBySubject(String subject) {
-        switch (subject.toLowerCase()) {
+        switch (subject.toLowerCase().trim()) {
             case "malay":
-                return Day.FRIDAY;
-            case "english":
-                return Day.MONDAY;
-            case "history":
-                return Day.THURSDAY;
-            case "mathematics":
                 return Day.TUESDAY;
+            case "english":
+                return Day.THURSDAY;
+            case "history":
+                return Day.FRIDAY;
+            case "mathematics":
+                return Day.MONDAY;
             case "science":
                 return Day.WEDNESDAY;
             case "french":
-                return Day.SATURDAY;
-            case "mandarin":
                 return Day.SUNDAY;
+            case "mandarin":
+                return Day.SATURDAY;
             default:
                 return null;
         }
-    }
+    }  
     
 
     // toString method

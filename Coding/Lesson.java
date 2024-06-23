@@ -119,19 +119,25 @@ public class Lesson {
                 Tutor tutor = tutors.stream()
                         .filter(t -> t.getSubject().equalsIgnoreCase(subject))
                         .findFirst()
-                        .orElse(null); // Assigning first available tutor for simplicity
-                double price = 30.0; // Assuming a fixed price
+                        .orElse(null); 
+                double price = 30.0; 
                 int lessonId = lessons.size() + 1;
                 Lesson.addLesson(lessonId, subject, tutor, student, price, day);
                 schedule.addLesson(new Lesson(lessonId, subject, tutor, student, price, day));
+                price += price;
     
+                // Print the price after adding the lesson
+                
                 registerAnother = promptForAnotherCourse(scanner);
+                System.out.println("Total tuition fee"  + ": $" + price);
+                
             } else {
                 System.out.println("Invalid subject or already registered. Please enter a valid subject.");
                 registerAnother = true; // Keep looping to register another course
             }
         } while (registerAnother);
     }
+    
     
     
     // Method to delete a course for a student

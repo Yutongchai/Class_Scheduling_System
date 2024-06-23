@@ -39,7 +39,7 @@ public class Login {
     private Person loginStudent(String username, String password, Scanner scanner,
             HomeTuitionSystem homeTuitionSystem) {
         if (studentCredentials.containsKey(username) && studentCredentials.get(username).equals(password)) {
-            System.out.println("Login successful as student.");
+            System.out.println("Login successful as student. Welcome back, " + username + ".");
             // Fetch student details from the system
             // Assuming we have a method to get a student object by username
             return homeTuitionSystem.getStudent(username); // Placeholder, replace with actual logic

@@ -15,8 +15,8 @@ public class Init {
             // Determine the interface based on the logged-in person
             if (personLoggedIn instanceof Student) {
                 homeTuitionSystem.studentInterface((Student) personLoggedIn, input);
-            } else if (personLoggedIn instanceof Tutor) {
-                homeTuitionSystem.adminInterface((Tutor) personLoggedIn, input);
+            } else if (personLoggedIn instanceof Admin) {
+                homeTuitionSystem.adminInterface((Admin) personLoggedIn, input);
             } else {
                 System.out.println("Logged in user is not recognized as a student or an admin. Exiting...");
             }

@@ -5,18 +5,19 @@ import java.util.Scanner;
 
 public class Login {
     private Map<String, String> studentCredentials;
-    private Map<String, String> adminCredentials;
+
+    private static final String ADMIN_USERNAME = "admin";
+    private static final String ADMIN_PASSWORD = "123";
+
     private static final String STUDENT_FILE = "student.txt";
 
     public Login() {
         studentCredentials = new HashMap<>();
-        adminCredentials = new HashMap<>();
-        adminCredentials.put("admin", "123");
         loadStudentCredentials();  // Load student credentials from file on object creation
     }
 
     public Person loginInterface(Scanner scanner) {
-        System.out.println("Login as (student/Admin): ");
+        System.out.println("Login as (student/admin): ");
         String userType = scanner.nextLine();
 
         System.out.println("Enter username: ");
@@ -26,31 +27,43 @@ public class Login {
         String password = scanner.nextLine();
 
         if (userType.equalsIgnoreCase("student")) {
-            if (studentCredentials.containsKey(username) && studentCredentials.get(username).equals(password)) {
-                System.out.println("Login successful as student.");
-                // Fetch student details from the system
-                // Assuming we have a method to get a student object by username
-                return getStudentByUsername(username);
-            } else {
-                System.out.println("Login failed. Invalid credentials.");
-
-                // Ask if the student wants to register a new account
-                System.out.println("Do you want to register a new account? (yes/no): ");
-                String choice = scanner.nextLine().trim();
-
-                if (choice.equalsIgnoreCase("yes")) {
-                    registerStudent(scanner);
-                    return getStudentByUsername(username);
-                } else {
-                    return null;
-                }
-            }
+            return loginStudent(username, password, scanner);
         } else if (userType.equalsIgnoreCase("admin")) {
-            // Admin login logic (not implemented in this example)
-            System.out.println("Admin login not implemented yet.");
-            return null;
+            return loginAdmin(username, password, scanner);
         } else {
             System.out.println("Invalid user type.");
+            return null;
+        }
+    }
+
+    private Person loginStudent(String username, String password, Scanner scanner) {
+        if (studentCredentials.containsKey(username) && studentCredentials.get(username).equals(password)) {
+            System.out.println("Login successful as student.");
+            // Fetch student details from the system
+            // Assuming we have a method to get a student object by username
+            return new Student(username, password); // Placeholder, replace with actual logic
+        } else {
+            System.out.println("Login failed. Invalid credentials.");
+
+            // Ask if the student wants to register a new account
+            System.out.println("Do you want to register a new account? (yes/no): ");
+            String choice = scanner.nextLine().trim();
+
+            if (choice.equalsIgnoreCase("yes")) {
+                registerStudent(scanner);
+                return new Student(username, password); // Placeholder, replace with actual logic
+            } else {
+                return null;
+            }
+        }
+    }
+
+    private Person loginAdmin(String username, String password, Scanner scanner) {
+        if (username.equals(ADMIN_USERNAME) && password.equals(ADMIN_PASSWORD)) {
+            System.out.println("Login successful as Admin.");
+            return new Admin(username, password); // Assuming Admin class constructor accepts username and password
+        } else {
+            System.out.println("Login failed. Invalid admin credentials.");
             return null;
         }
     }
@@ -97,28 +110,8 @@ public class Login {
             System.out.println("Error registering student: " + e.getMessage());
         }
     }
-
-    private Person getStudentByUsername(String username) {
-        try (BufferedReader reader = new BufferedReader(new FileReader(STUDENT_FILE))) {
-            String line;
-            while ((line = reader.readLine()) != null) {
-                String[] parts = line.split("\\s+"); // Split by whitespace
-                if (parts.length >= 4) {
-                    String fileUsername = parts[2]; // Username is at index 2
-                    String password = parts[3]; // Password is at index 3
-
-                    if (fileUsername.equals(username)) {
-                        // Return a Student object with the matched username
-                        return new Student(username, password); // Assuming Student class constructor accepts username
-                    }
-                }
-            }
-        } catch (IOException e) {
-            System.out.println("Error reading student file: " + e.getMessage());
-        }
-        return null; // Return null if username is not found
-    }
 }
+
 
 
 

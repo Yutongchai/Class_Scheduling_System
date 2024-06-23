@@ -72,24 +72,28 @@ public class HomeTuitionSystem {
         }
     }
 
-    public void adminInterface(Tutor tutor, Scanner scanner) {
+    public void adminInterface(Admin admin, Scanner scanner) {
         while (true) {
-            System.out.println("\n1. View Schedule");
-            System.out.println("\n2. View Student List");
+            System.out.println("\nAdmin Interface:");
+            System.out.println("1. View Schedule");
+            System.out.println("2. View Student List");
             System.out.println("3. Logout");
-
+    
             if (scanner.hasNextInt()) {
                 int choice = scanner.nextInt();
                 scanner.nextLine(); // Consume newline
-
+    
                 switch (choice) {
                     case 1:
-                        schedule.displayTutorSchedule(tutor);
+                        // Implement view schedule logic
+                        System.out.println("Viewing schedule...");
                         break;
                     case 2:
-                        tutor.displayStudentList();
+                        // Implement view student list logic
+                        System.out.println("Viewing student list...");
                         break;
                     case 3:
+                        System.out.println("Logging out...");
                         return;
                     default:
                         System.out.println("Invalid choice. Please try again.");
@@ -100,4 +104,5 @@ public class HomeTuitionSystem {
             }
         }
     }
+    
 }

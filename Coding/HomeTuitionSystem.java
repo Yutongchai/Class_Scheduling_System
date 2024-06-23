@@ -59,6 +59,7 @@ public class HomeTuitionSystem {
                         }
                         break;
                     case 4:
+                        System.out.println("Student " + student.getName() + " has logged out. Thank You");
                         return;
                     default:
                         System.out.println("Invalid choice. Please try again.");
@@ -107,7 +108,7 @@ public class HomeTuitionSystem {
                         System.out.print("*********************************************************\n");
                         break;
                     case 3:
-                        System.out.println("Logging out...");
+                        System.out.println("Admin has logged out. Thank You");
                         return;
                     default:
                         System.out.println("Invalid choice. Please try again.");

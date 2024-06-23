@@ -20,7 +20,7 @@ public class Login {
         System.out.println("Login as (student/admin): ");
         String userType = scanner.nextLine();
 
-        System.out.println("Enter username: ");
+        System.out.println("\nEnter username: ");
         String username = scanner.nextLine();
 
         System.out.println("Enter password: ");
@@ -109,7 +109,7 @@ public class Login {
 
     public Person registerStudent(Scanner scanner, HomeTuitionSystem homeTuitionSystem) {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(STUDENT_FILE, true))) {
-            System.out.print("Enter your name: ");
+            System.out.print("\nEnter your name: ");
             String name = scanner.nextLine().trim();
 
             System.out.print("Enter your phone number: ");

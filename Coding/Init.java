@@ -23,11 +23,11 @@ public class Init {
                 } else if (personLoggedIn instanceof Admin) {
                     homeTuitionSystem.adminInterface((Admin) personLoggedIn, input);
                 } else {
-                    System.out.println("Logged in user is not recognized as a student or an admin. Exiting...");
+                    System.out.println("\nLogged in user is not recognized as a student or an admin. Exiting...");
                 }
 
             } else {
-                System.out.println("Login failed. Exiting...");
+                System.out.println("\nLogin failed. Exiting...");
             }
         } catch (FileNotFoundException e) {
             System.out.println("An error occurred.");

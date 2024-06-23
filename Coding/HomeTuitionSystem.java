@@ -38,7 +38,7 @@ public class HomeTuitionSystem {
             System.out.println("\n1. View Schedule");
             System.out.println("2. Add Course");
             System.out.println("3. Delete Course");
-            System.out.println("4. Logout");
+            System.out.println("4. Logout\n");
 
             if (scanner.hasNextInt()) {
                 int choice = scanner.nextInt();
@@ -56,10 +56,12 @@ public class HomeTuitionSystem {
                     case 3:
                         if (firstTime) {
                             System.out.println("You must register at least one subject before deleting.");
+                        } else {
+                            Lesson.deleteCourse(student, schedule, scanner);
                         }
                         break;
                     case 4:
-                        System.out.println("Student " + student.getName() + " has logged out. Thank You");
+                        System.out.println("\nStudent " + student.getName() + " has logged out. Thank You");
                         return;
                     default:
                         System.out.println("Invalid choice. Please try again.");
@@ -76,7 +78,7 @@ public class HomeTuitionSystem {
             System.out.println("\nAdmin Interface:");
             System.out.println("1. View Tutor List");
             System.out.println("2. View Student List");
-            System.out.println("3. Logout");
+            System.out.println("3. Logout\n");
 
             if (scanner.hasNextInt()) {
                 int choice = scanner.nextInt();
@@ -86,7 +88,7 @@ public class HomeTuitionSystem {
                     case 1:
                         System.out.println("Viewing tutor list...");
                         System.out.println();
-                        System.out.print("********************************************************************\n");
+                        System.out.print("\n********************************************************************\n");
                         System.out.print("*  Name      | Email               | Phone Number   | Subject      *\n");
                         System.out.print("********************************************************************\n");
                         for (Tutor tutor : tutors) {
@@ -98,20 +100,20 @@ public class HomeTuitionSystem {
                     case 2:
                         System.out.println("Viewing student list...");
                         System.out.println();
-                        System.out.print("**********************************************************\n");
+                        System.out.print("\n**********************************************************\n");
                         System.out.print("*  Name      | Email                    | Phone Number   *\n");
                         System.out.print("**********************************************************\n");
                         for (Student student : students) {
                             System.out.printf("*  %-10s| %-25s| %-15s*\n", student.getName(), student.getEmail(),
                                     student.getPhoneNumber());
                         }
-                        System.out.print("*********************************************************\n");
+                        System.out.print("**********************************************************\n");
                         break;
                     case 3:
-                        System.out.println("Admin has logged out. Thank You");
+                        System.out.println("\nAdmin has logged out. Thank You");
                         return;
                     default:
-                        System.out.println("Invalid choice. Please try again.");
+                        System.out.println("\nInvalid choice. Please try again.");
                 }
             } else {
                 scanner.next(); // Consume invalid input

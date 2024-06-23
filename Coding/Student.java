@@ -6,8 +6,8 @@ public class Student extends Person {
         this.grade = grade;
     }
 
-    public Student(String username) {
-        super(username);
+    public Student(String username, String password) {
+        super(username, password);
     }
 
     public String getGrade() {

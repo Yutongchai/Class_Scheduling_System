@@ -6,14 +6,12 @@ import java.util.Scanner;
 public class Login {
     private Map<String, String> studentCredentials;
     private Map<String, String> adminCredentials;
-
     private static final String STUDENT_FILE = "student.txt";
 
     public Login() {
         studentCredentials = new HashMap<>();
         adminCredentials = new HashMap<>();
-        // Initialize admin credentials (assuming they are fixed)
-        adminCredentials.put("admin", "admin1");
+        adminCredentials.put("admin", "123");
         loadStudentCredentials();  // Load student credentials from file on object creation
     }
 
@@ -41,27 +39,16 @@ public class Login {
                 String choice = scanner.nextLine().trim();
 
                 if (choice.equalsIgnoreCase("yes")) {
-                    System.out.println("Enter username for registration: ");
-                    String newUsername = scanner.nextLine().trim();
-
-                    System.out.println("Enter password for registration: ");
-                    String newPassword = scanner.nextLine().trim();
-
-                    registerStudent(newUsername, newPassword);
-                    return getStudentByUsername(newUsername);
+                    registerStudent(scanner);
+                    return getStudentByUsername(username);
                 } else {
                     return null;
                 }
             }
         } else if (userType.equalsIgnoreCase("admin")) {
-            if (adminCredentials.containsKey(username) && adminCredentials.get(username).equals(password)) {
-                System.out.println("Login successful as Admin.");
-                // Implement admin functionality here
-                return null; // or return an admin object if needed
-            } else {
-                System.out.println("Login failed. Invalid credentials.");
-                return null;
-            }
+            // Admin login logic (not implemented in this example)
+            System.out.println("Admin login not implemented yet.");
+            return null;
         } else {
             System.out.println("Invalid user type.");
             return null;
@@ -72,10 +59,10 @@ public class Login {
         try (BufferedReader reader = new BufferedReader(new FileReader(STUDENT_FILE))) {
             String line;
             while ((line = reader.readLine()) != null) {
-                String[] parts = line.split(" ");
-                if (parts.length >= 2) {
-                    String username = parts[2]; // assuming username is at index 0
-                    String password = parts[3]; // assuming password is at index 1
+                String[] parts = line.split("\\s+");
+                if (parts.length >= 5) {
+                    String username = parts[2];
+                    String password = parts[3];
                     studentCredentials.put(username, password);
                 }
             }
@@ -84,9 +71,24 @@ public class Login {
         }
     }
 
-    public void registerStudent(String username, String password) {
+    public void registerStudent(Scanner scanner) {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(STUDENT_FILE, true))) {
-            writer.write(username + " " + password);
+            System.out.print("Enter your name: ");
+            String name = scanner.nextLine().trim();
+
+            System.out.print("Enter your phone number: ");
+            String phoneNumber = scanner.nextLine().trim();
+
+            System.out.print("Choose a username: ");
+            String username = scanner.nextLine().trim();
+
+            System.out.print("Choose a password: ");
+            String password = scanner.nextLine().trim();
+
+            System.out.print("Enter your email: ");
+            String email = scanner.nextLine().trim();
+
+            writer.write(name + " " + phoneNumber + " " + username + " " + password + " " + email);
             writer.newLine();
             writer.flush();
             studentCredentials.put(username, password);
@@ -107,7 +109,7 @@ public class Login {
 
                     if (fileUsername.equals(username)) {
                         // Return a Student object with the matched username
-                        return new Student(username); // Assuming Student class constructor accepts username
+                        return new Student(username, password); // Assuming Student class constructor accepts username
                     }
                 }
             }

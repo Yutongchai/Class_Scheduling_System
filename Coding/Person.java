@@ -15,8 +15,9 @@ public abstract class Person {
         this.phoneNumber = phoneNumber;
     }
 
-    public Person(String username) {
+    public Person(String username, String password) {
         this.username = username;
+        this.password = password;
     }
 
     public String getType() {

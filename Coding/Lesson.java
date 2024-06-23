@@ -81,55 +81,57 @@ public class Lesson {
         return lessons;
     }
 
-    // Method to register a course for a student
-    public static void registerCourse(Student student, List<Tutor> tutors, Schedule schedule, Scanner scanner) {
-        boolean registerAnother;
-        do {
-            List<String> registeredSubjects = lessons.stream()
-                    .filter(lesson -> lesson.getStudent().equals(student))
-                    .map(Lesson::getSubject)
-                    .collect(Collectors.toList());
+    // Adjusted registerCourse method in Lesson class
+public static void registerCourse(Student student, List<Tutor> tutors, Schedule schedule, Scanner scanner) {
+    boolean registerAnother;
+    do {
+        List<String> registeredSubjects = lessons.stream()
+                .filter(lesson -> lesson.getStudent().equals(student))
+                .map(Lesson::getSubject)
+                .collect(Collectors.toList());
 
-            System.out.println("List of subjects offered:");
-            System.out.println("*******************************************************************");
-            System.out.println("*  Subject         | Tutor       | Day       | Time               *");
-            System.out.println("*******************************************************************");
+        System.out.println("List of subjects offered:");
+        System.out.println("*******************************************************************");
+        System.out.println("*  Subject         | Tutor       | Day       | Time               *");
+        System.out.println("*******************************************************************");
 
-            List<String> availableSubjects = tutors.stream()
-                    .map(Tutor::getSubject)
-                    .distinct()
-                    .filter(subject -> !registeredSubjects.contains(subject))
-                    .collect(Collectors.toList());
+        // Filter tutors to find available subjects not already registered by the student
+        List<String> availableSubjects = tutors.stream()
+                .filter(tutor -> !registeredSubjects.contains(tutor.getSubject()))
+                .map(Tutor::getSubject)
+                .collect(Collectors.toList());
 
-            for (Tutor tutor : tutors) {
-                if (availableSubjects.contains(tutor.getSubject())) {
-                    System.out.printf("*  %-16s| %-12s| %-10s| %-12s *%n", tutor.getSubject(),
-                            tutor.getName(), getDayBySubject(tutor.getSubject()), "8:00 PM - 10:00 PM");
-                }
+        // Display available subjects with their details
+        for (Tutor tutor : tutors) {
+            if (availableSubjects.contains(tutor.getSubject())) {
+                System.out.printf("*  %-16s| %-12s| %-10s| %-12s *%n", tutor.getSubject(),
+                        tutor.getName(), getDayBySubject(tutor.getSubject()), "8:00 PM - 10:00 PM");
             }
-            System.out.println("*******************************************************************");
+        }
+        System.out.println("*******************************************************************");
 
-            System.out.print("Enter course details (subject): ");
-            String subject = scanner.nextLine();
+        System.out.print("Enter course details (subject): ");
+        String subject = scanner.nextLine().trim();
 
-            if (availableSubjects.contains(subject)) {
-                Day day = getDayBySubject(subject);
-                Tutor tutor = tutors.stream()
-                        .filter(t -> t.getSubject().equals(subject))
-                        .findFirst()
-                        .orElse(null); // Assigning first available tutor for simplicity
-                double price = 30.0; // Assuming a fixed price
-                int lessonId = lessons.size() + 1;
-                Lesson.addLesson(lessonId, subject, tutor, student, price, day);
-                schedule.addLesson(new Lesson(lessonId, subject, tutor, student, price, day));
+        if (availableSubjects.contains(subject)) {
+            Day day = getDayBySubject(subject);
+            Tutor tutor = tutors.stream()
+                    .filter(t -> t.getSubject().equals(subject))
+                    .findFirst()
+                    .orElse(null); // Assigning first available tutor for simplicity
+            double price = 30.0; // Assuming a fixed price
+            int lessonId = lessons.size() + 1;
+            Lesson.addLesson(lessonId, subject, tutor, student, price, day);
+            schedule.addLesson(new Lesson(lessonId, subject, tutor, student, price, day));
 
-                registerAnother = promptForAnotherCourse(scanner);
-            } else {
-                System.out.println("Invalid subject or already registered. Please enter a valid subject.");
-                registerAnother = true;
-            }
-        } while (registerAnother);
-    }
+            registerAnother = promptForAnotherCourse(scanner);
+        } else {
+            System.out.println("Invalid subject or already registered. Please enter a valid subject.");
+            registerAnother = true; // Keep looping to register another course
+        }
+    } while (registerAnother);
+}
+
 
     // Method to delete a course for a student
     public static void deleteCourse(Student student, Schedule schedule, Scanner scanner) {

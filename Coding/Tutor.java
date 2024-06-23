@@ -26,15 +26,16 @@ public class Tutor extends Person {
     public void addLesson(Lesson lesson) {
         lessonList.add(lesson);
         System.out.println("Lesson added: " + lesson.toString());
-        }
-        
+    }
+
     public List<Student> getStudentList() {
         return Lesson.getLessons().stream()
-            .filter(lesson -> lesson.getTutor().equals(this))
-            .map(Lesson::getStudent)
-            .distinct()
-            .collect(Collectors.toList());
+                .filter(lesson -> lesson.getTutor().equals(this))
+                .map(Lesson::getStudent)
+                .distinct()
+                .collect(Collectors.toList());
     }
+
     public void displayStudentList() {
         System.out.println("Tutor: " + getName() + ", Subject: " + subject);
         List<Student> students = getStudentList();
@@ -49,7 +50,7 @@ public class Tutor extends Person {
     }
 
     public void printDetails() {
-        
+
         System.out.println();
     }
 

@@ -10,13 +10,13 @@ public class Login {
     private static final String ADMIN_PASSWORD = "123";
 
     private static final String STUDENT_FILE = "student.txt";
+    private static final String ADMIN_FILE = "tutor.txt";
 
     public Login() {
         studentCredentials = new HashMap<>();
-        loadStudentCredentials();  // Load student credentials from file on object creation
     }
 
-    public Person loginInterface(Scanner scanner) {
+    public Person loginInterface(Scanner scanner, HomeTuitionSystem homeTuitionSystem) {
         System.out.println("Login as (student/admin): ");
         String userType = scanner.nextLine();
 
@@ -27,7 +27,7 @@ public class Login {
         String password = scanner.nextLine();
 
         if (userType.equalsIgnoreCase("student")) {
-            return loginStudent(username, password, scanner);
+            return loginStudent(username, password, scanner, homeTuitionSystem);
         } else if (userType.equalsIgnoreCase("admin")) {
             return loginAdmin(username, password, scanner);
         } else {
@@ -36,12 +36,13 @@ public class Login {
         }
     }
 
-    private Person loginStudent(String username, String password, Scanner scanner) {
+    private Person loginStudent(String username, String password, Scanner scanner,
+            HomeTuitionSystem homeTuitionSystem) {
         if (studentCredentials.containsKey(username) && studentCredentials.get(username).equals(password)) {
             System.out.println("Login successful as student.");
             // Fetch student details from the system
             // Assuming we have a method to get a student object by username
-            return new Student(username, password); // Placeholder, replace with actual logic
+            return homeTuitionSystem.getStudent(username); // Placeholder, replace with actual logic
         } else {
             System.out.println("Login failed. Invalid credentials.");
 
@@ -50,8 +51,7 @@ public class Login {
             String choice = scanner.nextLine().trim();
 
             if (choice.equalsIgnoreCase("yes")) {
-                registerStudent(scanner);
-                return new Student(username, password); // Placeholder, replace with actual logic
+                return registerStudent(scanner, homeTuitionSystem);
             } else {
                 return null;
             }
@@ -68,23 +68,46 @@ public class Login {
         }
     }
 
-    private void loadStudentCredentials() {
-        try (BufferedReader reader = new BufferedReader(new FileReader(STUDENT_FILE))) {
-            String line;
-            while ((line = reader.readLine()) != null) {
-                String[] parts = line.split("\\s+");
-                if (parts.length >= 5) {
-                    String username = parts[2];
-                    String password = parts[3];
-                    studentCredentials.put(username, password);
-                }
-            }
-        } catch (IOException e) {
-            System.out.println("Error loading student credentials: " + e.getMessage());
+    public void loadStudentCredentials(HomeTuitionSystem homeTuitionSystem) throws FileNotFoundException {
+        File myObj = new File(STUDENT_FILE);
+        Scanner myReader = new Scanner(myObj);
+        while (myReader.hasNextLine()) {
+            String data = myReader.nextLine();
+            String[] studentData = data.split(" ");
+            String name = studentData[0];
+            String phone = studentData[1];
+            String username = studentData[2];
+            String password = studentData[3];
+            String email = studentData[4];
+            String grade = studentData[5];
+
+            studentCredentials.put(username, password);
+
+            Student student = new Student(name, username, password, email, phone, grade);
+            homeTuitionSystem.addStudent(student);
         }
+        myReader.close();
     }
 
-    public void registerStudent(Scanner scanner) {
+    public void loadTutorCredentials(HomeTuitionSystem homeTuitionSystem) throws FileNotFoundException {
+        File myObj = new File(ADMIN_FILE);
+        Scanner myReader = new Scanner(myObj);
+        while (myReader.hasNextLine()) {
+            String data = myReader.nextLine();
+            String[] tutorData = data.split(", ");
+            String gender = tutorData[0];
+            String name = tutorData[1];
+            String email = tutorData[2];
+            String phone = tutorData[3];
+            String subject = tutorData[4];
+
+            Tutor tutor = new Tutor(gender, name, email, phone, subject);
+            homeTuitionSystem.addTutor(tutor);
+        }
+        myReader.close();
+    }
+
+    public Person registerStudent(Scanner scanner, HomeTuitionSystem homeTuitionSystem) {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(STUDENT_FILE, true))) {
             System.out.print("Enter your name: ");
             String name = scanner.nextLine().trim();
@@ -107,16 +130,20 @@ public class Login {
             writer.write(name + " " + phoneNumber + " " + username + " " + password + " " + email + " " + grade);
             writer.newLine();
             writer.flush();
+
+            Student newStudent = new Student(name, username, password, email, phoneNumber, grade);
             studentCredentials.put(username, password);
+            homeTuitionSystem.addStudent(newStudent);
+
             System.out.println("Registration successful for student: " + username);
+
+            return newStudent;
         } catch (IOException e) {
             System.out.println("Error registering student: " + e.getMessage());
         }
+        return null;
     }
 }
-
-
-
 
 /*
  * import java.util.HashMap;

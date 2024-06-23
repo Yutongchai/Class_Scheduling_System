@@ -125,4 +125,21 @@ public class HomeTuitionSystem {
         }
     }
 
+    // new method
+    public Student getStudent(String username) {
+        for (Student student : students) {
+            if (student.getUsername().equals(username))
+                return student;
+        }
+        return null;
+    }
+
+    // new method
+    public Tutor getTutor(String username) {
+        for (Tutor tutor : tutors) {
+            if (tutor.getUsername().equals(username))
+                return tutor;
+        }
+        return null;
+    }
 }

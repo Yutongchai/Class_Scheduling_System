@@ -101,7 +101,10 @@ public class Login {
             System.out.print("Enter your email: ");
             String email = scanner.nextLine().trim();
 
-            writer.write(name + " " + phoneNumber + " " + username + " " + password + " " + email);
+            System.out.print("Enter your grade: ");
+            String grade = scanner.nextLine().trim();
+
+            writer.write(name + " " + phoneNumber + " " + username + " " + password + " " + email + " " + grade);
             writer.newLine();
             writer.flush();
             studentCredentials.put(username, password);

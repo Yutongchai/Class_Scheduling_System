@@ -103,14 +103,14 @@ public class HomeTuitionSystem {
                     case 3:
                         System.out.println("Viewing student list...");
                         System.out.println();
-                        System.out.print("*****************************************************\n");
-                        System.out.print("*  Name      | Email               | Phone Number   *\n");
-                        System.out.print("*****************************************************\n");
+                        System.out.print("**********************************************************\n");
+                        System.out.print("*  Name      | Email                    | Phone Number   *\n");
+                        System.out.print("**********************************************************\n");
                         for (Student student : students) {
-                            System.out.printf("*  %-10s| %-20s| %-15s*\n", student.getName(), student.getEmail(),
+                            System.out.printf("*  %-10s| %-25s| %-15s*\n", student.getName(), student.getEmail(),
                                     student.getPhoneNumber());
                         }
-                        System.out.print("*****************************************************\n");
+                        System.out.print("*********************************************************\n");
                         break;
                     case 4:
                         System.out.println("Logging out...");

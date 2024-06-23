@@ -38,10 +38,6 @@ public class Init {
             while (myReader2.hasNextLine()) {
                 String data = myReader2.nextLine();
                 String[] studentData = data.split(" ");
-                if (studentData.length < 6) {
-                    System.out.println("Invalid student data: " + data);
-                    continue; // Skip this line and move to the next one
-                }
                 String name = studentData[0];
                 String phone = studentData[1];
                 String username = studentData[2];

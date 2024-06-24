@@ -3,19 +3,17 @@ import java.util.stream.Collectors;
 
 public class Tutor extends Person {
     private String subject;
-    
 
     public Tutor(String gender, String name, String email, String phoneNumber, String subject) {
         super(name, email, phoneNumber);
         this.subject = subject;
-       
+
     }
 
     public String getSubject() {
         return subject;
     }
 
-    
     public List<Student> getStudentList() {
         return Lesson.getLessons().stream()
                 .filter(lesson -> lesson.getTutor().equals(this))
@@ -36,11 +34,10 @@ public class Tutor extends Person {
             }
         }
     }
-    
+
     public void printDetails() {
-        
+
         System.out.println();
     }
-    
-}
 
+}

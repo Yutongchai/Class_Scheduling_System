@@ -10,6 +10,11 @@ public class Tutor extends Person {
 
     }
 
+    @Override
+    public void displayRole() {
+        System.out.println("Role: Tutor");
+    }
+
     public String getSubject() {
         return subject;
     }
@@ -36,7 +41,6 @@ public class Tutor extends Person {
     }
 
     public void printDetails() {
-
         System.out.println();
     }
 

@@ -4,4 +4,9 @@ public class Admin extends Person {
         super(username, password);
     }
 
+    @Override
+    public void displayRole() {
+        System.out.println("Role: Admin");
+    }
+
 };

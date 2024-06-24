@@ -14,7 +14,7 @@ public abstract class Person {
         this.email = email;
         this.phoneNumber = phoneNumber;
     }
-
+    
     public Person(String username, String password) {
         this.username = username;
         this.password = password;
@@ -26,9 +26,7 @@ public abstract class Person {
         this.phoneNumber = phoneNumber;
     }
 
-    public String getType() {
-        return type;
-    }
+    public abstract void displayRole();
 
     public String getName() {
         return name;

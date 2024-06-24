@@ -35,7 +35,8 @@ public class HomeTuitionSystem {
     public void studentInterface(Student student, Scanner scanner) {
         boolean firstTime = true;
         while (true) {
-            System.out.println("\n1. View Schedule");
+            System.out.println("\nStudent Interface:");
+            System.out.println("1. View Schedule");
             System.out.println("2. Add Course");
             System.out.println("3. Delete Course");
             System.out.println("4. Logout\n");

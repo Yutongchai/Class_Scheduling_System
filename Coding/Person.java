@@ -14,7 +14,7 @@ public abstract class Person {
         this.email = email;
         this.phoneNumber = phoneNumber;
     }
-    
+
     public Person(String username, String password) {
         this.username = username;
         this.password = password;

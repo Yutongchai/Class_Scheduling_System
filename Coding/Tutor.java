@@ -44,7 +44,7 @@ public class Tutor extends Person {
         System.out.println();
     }
 
-     public String getDetails() {
+    public String getDetails() {
         return super.getDetails();
     }
 

@@ -44,23 +44,3 @@ public class Tutor extends Person {
     
 }
 
-/*
-
-import java.util.ArrayList;
-private ArrayList<Student> studentList;
-private ArrayList<Lesson> lessonList;
-    
-
-this.studentList = new ArrayList<>();
-this.lessonList = new ArrayList<>();
-
-
-public void addStudent(Student student) {
-     studentList.add(student);
-     System.out.println("Student " + student.getName() + " added to tutor " + getName() + "'s list.");
- }
-
- public void addLesson(Lesson lesson) {
-     lessonList.add(lesson);
-     System.out.println("Lesson added: " + lesson.toString());
- }*/

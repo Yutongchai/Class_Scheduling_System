@@ -79,11 +79,10 @@ public class Login {
             String username = studentData[2];
             String password = studentData[3];
             String email = studentData[4];
-            String grade = studentData[5];
 
             studentCredentials.put(username, password);
 
-            Student student = new Student(name, username, password, email, phone, grade);
+            Student student = new Student(name, username, password, email, phone);
             homeTuitionSystem.addStudent(student);
         }
         myReader.close();
@@ -124,14 +123,11 @@ public class Login {
             System.out.print("Enter your email: ");
             String email = scanner.nextLine().trim();
 
-            System.out.print("Enter your grade: ");
-            String grade = scanner.nextLine().trim();
-
-            writer.write(name + " " + phoneNumber + " " + username + " " + password + " " + email + " " + grade);
+            writer.write(name + " " + phoneNumber + " " + username + " " + password + " " + email);
             writer.newLine();
             writer.flush();
 
-            Student newStudent = new Student(name, username, password, email, phoneNumber, grade);
+            Student newStudent = new Student(name, username, password, email, phoneNumber);
             studentCredentials.put(username, password);
             homeTuitionSystem.addStudent(newStudent);
 

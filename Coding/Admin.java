@@ -4,4 +4,8 @@ public class Admin extends Person {
         super(username, password);
     }
 
+    public String getDetails() {
+        return "";
+    }
+
 };

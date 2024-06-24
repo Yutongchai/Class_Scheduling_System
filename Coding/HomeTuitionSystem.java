@@ -28,7 +28,7 @@ public class HomeTuitionSystem {
 
     public void displayTutors() {
         for (Tutor tutor : tutors) {
-            tutor.printDetails();
+            tutor.getDetails();
         }
     }
 

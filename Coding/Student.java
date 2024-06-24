@@ -7,4 +7,8 @@ public class Student extends Person {
     public Student(String username, String password) {
         super(username, password);
     }
+
+    public String getDetails() {
+        return super.getDetails();
+    }
 }

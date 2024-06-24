@@ -1,4 +1,3 @@
-
 public class Admin extends Person {
     
     
@@ -7,19 +6,6 @@ public class Admin extends Person {
     }
     
 };
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -71,3 +57,15 @@ import java.util.Scanner;*/
         System.out.println("Error adding tutor: " + e.getMessage());
     }
 }*/
+
+
+
+
+
+
+
+
+
+
+
+

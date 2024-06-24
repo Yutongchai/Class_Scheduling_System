@@ -10,15 +10,6 @@ public class Student extends Person {
         super(username, password);
     }
 
-    public String getGrade() {
-        return grade;
-    }
-
-    @Override
-    public String toString() {
-        return super.toString() + " " + grade;
-    }
-
 
     public void enrollLesson(Lesson lesson) {
         // Enrollment logic here
@@ -26,8 +17,16 @@ public class Student extends Person {
         //schedule.addLesson(lesson);
     }
 
+}
+
+/*
     @Override
     public String getDetails() {
-        return super.getDetails() + ", Grade: " + grade;
+    return super.getDetails() + ", Grade: " + grade;
+
+    @Override
+    public String toString() {
+        return super.toString() + " " + grade;
     }
-}
+
+}*/

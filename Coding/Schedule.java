@@ -42,7 +42,7 @@ class Schedule {
     }
 
     private String getClassTime(String subject) {
-        return "8:00 PM - 10:00 PM"; // Assuming all classes have the same time
+        return "8:00 PM - 10:00 PM"; 
     }
 
 }

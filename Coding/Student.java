@@ -9,24 +9,4 @@ public class Student extends Person {
     public Student(String username, String password) {
         super(username, password);
     }
-
-
-    public void enrollLesson(Lesson lesson) {
-        // Enrollment logic here
-        System.out.println("Student " + getName() + " enrolled in lesson: " + lesson.toString());
-        //schedule.addLesson(lesson);
-    }
-
 }
-
-/*
-    @Override
-    public String getDetails() {
-    return super.getDetails() + ", Grade: " + grade;
-
-    @Override
-    public String toString() {
-        return super.toString() + " " + grade;
-    }
-
-}*/

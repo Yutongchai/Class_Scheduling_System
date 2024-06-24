@@ -10,6 +10,10 @@ public class Student extends Person {
 
     @Override
     public void displayRole() {
-        System.out.println("Role: Student");
+        System.out.println("\nRole: Student");
+    }
+
+    public String getDetails() {
+        return super.getDetails();
     }
 }

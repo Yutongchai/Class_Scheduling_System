@@ -28,14 +28,14 @@ public class HomeTuitionSystem {
 
     public void displayTutors() {
         for (Tutor tutor : tutors) {
-            tutor.printDetails();
+            tutor.getDetails();
         }
     }
 
     public void studentInterface(Student student, Scanner scanner) {
         boolean firstTime = true;
         while (true) {
-            System.out.println("\nStudent Interface:");
+            student.displayRole();
             System.out.println("1. View Schedule");
             System.out.println("2. Add Course");
             System.out.println("3. Delete Course");
@@ -76,7 +76,7 @@ public class HomeTuitionSystem {
 
     public void adminInterface(Admin admin, Scanner scanner) {
         while (true) {
-            System.out.println("\nAdmin Interface:");
+            admin.displayRole();
             System.out.println("1. View Tutor List");
             System.out.println("2. View Student List");
             System.out.println("3. Logout\n");

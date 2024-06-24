@@ -12,7 +12,7 @@ public class Tutor extends Person {
 
     @Override
     public void displayRole() {
-        System.out.println("Role: Tutor");
+        System.out.println("\nRole: Tutor");
     }
 
     public String getSubject() {
@@ -42,6 +42,10 @@ public class Tutor extends Person {
 
     public void printDetails() {
         System.out.println();
+    }
+
+     public String getDetails() {
+        return super.getDetails();
     }
 
 }

@@ -6,7 +6,11 @@ public class Admin extends Person {
 
     @Override
     public void displayRole() {
-        System.out.println("Role: Admin");
+        System.out.println("\nRole: Admin");
+    }
+
+    public String getDetails() {
+        return "";
     }
 
 };

@@ -19,7 +19,6 @@ class Schedule {
                         && lesson.getSubject().equalsIgnoreCase(subject));
     }
 
-
     public void displayStudentSchedule(Student student, boolean firstTime) {
         if (firstTime) {
             System.out.println("No registered subjects.");
@@ -42,31 +41,7 @@ class Schedule {
     }
 
     private String getClassTime(String subject) {
-        return "8:00 PM - 10:00 PM"; 
+        return "8:00 PM - 10:00 PM";
     }
 
 }
-
-/* public void displayTutorSchedule(Tutor tutor) {
-        List<Lesson> tutorLessons = lessons.stream()
-                .filter(lesson -> lesson.getTutor().equals(tutor))
-                .collect(Collectors.toList());
-
-        if (tutorLessons.isEmpty()) {
-            System.out.println("No lessons scheduled.");
-            return;
-        }
-
-        System.out.println("\n\nLessons scheduled for Tutor " + tutor.getName() + ":");
-        System.out.println("******************************************************************");
-        System.out.println("*  Subject         | Tutor       | Day       | Time              *");
-        System.out.println("******************************************************************");
-
-        for (Lesson lesson : tutorLessons) {
-            System.out.printf("*  %-16s| %-12s| %-10s| %-12s *%n", lesson.getSubject(),
-                    lesson.getStudent().getName(), lesson.getDay(),
-                    getClassTime(lesson.getSubject()));
-        }
-        System.out.println("******************************************************************");
-    }
- */

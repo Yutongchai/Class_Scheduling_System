@@ -91,7 +91,8 @@ public class Lesson {
             System.out.println("*  Subject         | Tutor       | Day       | Time               *");
             System.out.println("*******************************************************************");
 
-            // Filter tutors to find available subjects not already registered by the student
+            // Filter tutors to find available subjects not already registered by the
+            // student
             List<String> availableSubjects = tutors.stream()
                     .filter(tutor -> !registeredSubjects.contains(tutor.getSubject()))
                     .map(Tutor::getSubject)
@@ -225,12 +226,3 @@ public class Lesson {
                 ", day=" + day + "]";
     }
 }
-
-
-/* Method to calculate total fee per month for a student
-public static double calculateTotalFeePerMonth(Student student) {
-    return lessons.stream()
-            .filter(lesson -> lesson.getStudent().equals(student))
-            .mapToDouble(Lesson::getPrice)
-            .sum();
-}*/

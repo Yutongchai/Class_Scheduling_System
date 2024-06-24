@@ -30,16 +30,13 @@ public abstract class Person {
         return type;
     }
 
-
     public String getName() {
         return name;
     }
 
-
     public String getUsername() {
         return username;
     }
-
 
     public String getPassword() {
         return password;

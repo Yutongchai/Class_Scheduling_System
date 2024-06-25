@@ -14,7 +14,7 @@ public class Tutor extends Person {
     public void displayRole() {
         System.out.println("\nRole: Tutor");
     }
-
+ 
     public String getSubject() {
         return subject;
     }
